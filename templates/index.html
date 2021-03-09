@@ -1,0 +1,54 @@
+{{define "scripts"}}
+<script>
+    function sendLoginData() {
+        $.post("/login", $("#indexLoginForm").serialize()).done(function (response) {
+            if (response.kind || !response.status) {
+                console.log(response);
+                $("#loginErr").text("Неверный логин или Пароль").show();
+                $("#passwordField").val("");
+                return;
+            }
+            document.location.replace("/"+response.status);
+        }).fail(function (){
+            $("#loginErr").text("Произошла неизвестная ошибка").show();
+        })
+    }
+    $("#indexPasswordField").ready(function () {$("#indexPasswordField").keyup(function(event){
+        if(event.key === "Enter"){
+            sendLoginData()
+        }
+    })});
+    </script>
+{{end}}
+{{define "styles"}}{{end}}
+{{define "index"}}
+{{template "head"}}
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <div class="card mx-auto" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Добро пожаловать на сайт тестирований</h5>
+                    <p class="card-sub text-danger">
+                        ВНИМАНИЕ! Сайт доступен в режиме Beta-тестирования
+                    </p>
+                    <form id="indexLoginForm">
+                        <div class="form-group">
+                            <label for="indexLoginField">Логин</label>
+                            <input class="form-control" id="indexLoginField" type="text" name="login" placeholder="Ваш логин" value="" maxlength="70">
+                        </div>
+                        <div class="form-group">
+                            <label for="indexPasswordField">Пароль</label>
+                            <input type="password" class="form-control" id="indexPasswordField" name="password"  maxlength="70" placeholder="Ваш пароль" value="">
+                        </div>
+
+                        <input type="button" class="btn btn-primary float-right" value="Войти" onclick="sendLoginData()">
+                        <span id="loginErr" class="text-danger dn">Неверный Логин или Пароль!</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{template "bottom"}}
+{{end}}
+

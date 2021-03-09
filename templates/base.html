@@ -1,0 +1,158 @@
+{{define "head"}}
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,500,600,700|Montserrat+Alternates:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    {{template "scripts"}}
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .dn {
+            display: none;
+        }
+        .sortKey {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        #statsCardTitle {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 55%;
+            display: inline-block;
+        }
+        .invisAction {
+            visibility: collapse;
+        }
+        .actionTd {
+            width: 1%;
+        }
+        .noSelect {
+            -ms-user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+    </style>
+    {{template "styles"}}
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <span class="navbar-brand">Добро пожаловать!</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li id="barBtnBack"  class="nav-item active"  style="display: none;">
+                <span class="btn btn-secondary">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>назад
+                </span>
+            </li>
+        </ul>
+
+        <a class="btn btn-danger my-2 my-sm-0 mr-2 dn" href="/remake">REMAKE</a>
+
+        <div id="barPlace" class="dn">
+            <span id="pasWarning" class="mr-3 text-danger dn">
+            <i class="fa fa-warning" aria-hidden="true"></i>
+            Вашему паролю более 50 дней. Обновите свой пароль!
+        </span>
+            <div class="dropdown dropleft" style="display: inline">
+                <span class="btn btn-outline-secondary dropdown-toggle" style="cursor: pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span id="loginPlace"></span>
+                </span>
+                <div class="dropdown-menu">
+                    <div class="card border-0 shadow" id="show_msg_card">
+                        <form id="newPasForm" class="card-body" method="post" action="/edit_user_data">
+                            <h5 class="card-title">Обновить пароль</h5>
+                            <label for="curPasField">Текущий пароль</label>
+                            <input id="curPasField" type="password" style="width: 300px" class="form-control" maxlength="50" name="password">
+                            <hr>
+
+                            <label for="newPasField">Новый пароль</label>
+                            <input id="newPasField" type="password" style="width: 300px" class="form-control" maxlength="50" name="newPassword"
+                                   oninput="saveNewDataBtn.disabled=+validateNewPas($(this)) + confPas($(this), $(newPasConfField))!==2">
+                            <div id="newPasFieldMsg" class="invalid-feedback dn">Недопустимый пароль. Он должен содержать не меннее 9 символов</div>
+                            <br>
+                            <label for="newPasConfField">Повторите пароль</label>
+                            <input id="newPasConfField" type="password" style="width: 300px" class="form-control" maxlength="50"
+                                   oninput="saveNewDataBtn.disabled=+validateNewPas($(newPasField))  + confPas($(newPasField), $(this))!==2">
+                            <div id="newPasConfFieldMsg" class="invalid-feedback dn">Введенные пароли не совпаюдают</div>
+
+
+                            <br>
+                            <span id="updateErr" class="text-danger dn">Не удалось обновить пароль<br><br></span>
+                            <input id="saveNewDataBtn" type="button" class="btn btn-primary mr-1" value="Обновить данные" onclick="sendNewData()" disabled>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <span>
+                <a class="btn btn-outline-danger my-2 my-sm-0" href="/logout">Выход</a>
+            </span>
+        </div>
+
+
+    </div>
+</nav>
+
+<div class="container mt-3">
+{{end}}
+
+    
+{{define "bottom"}}
+</div>
+
+
+<div class="modal fade" id="loginModel" tabindex="-1" role="dialog" aria-labelledby="loginModelTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="card-title">Авторизуйтесь</h5>
+            </div>
+            <div class="modal-body">
+                <p class="card-sub text-danger dn" id="loginFormInfo">ВНИМАНИЕ! Сайт доступен в режиме Beta-тестирования</p>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginField">Логин</label>
+                        <input class="form-control" id="loginField" type="text" name="login" placeholder="Ваш логин" value="admin" maxlength="70" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordField">Пароль</label>
+                        <input type="password" class="form-control" id="passwordField" name="password"  maxlength="70" placeholder="Ваш пароль">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span id="loginErr" class="text-danger mr-3 dn">Неверный Логин или Пароль!</span>
+                <input type="button" class="btn btn-primary float-right" value="Войти" onclick="sendLoginData()">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
+{{end}}

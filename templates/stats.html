@@ -1,0 +1,33 @@
+{{define "stats"}}
+<ul class="list-group" id="statsLines">
+    <li id="statsLinesPsyCount" class="list-group-item d-none justify-content-between align-items-center">
+        Количество психологов
+        <span id="stat_psy_count" class="badge badge-Light badge-pill">?</span>
+    </li>
+    <li id="statsLinesGradeCount" class="list-group-item d-none justify-content-between align-items-center">
+        Количество классов
+        <span id="stat_grade_count" class="badge badge-Light badge-pill">?</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Количество испытуемых
+        <span id="stat_whole" class="badge badge-Light badge-pill">?</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Еще не протестировано
+        <span id="stat_not_yet" class="badge badge-secondary badge-pill">?</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Вне групп риска
+        <span id="stat_clear" class="badge badge-success badge-pill">?</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        В группах риска
+        <span id="stat_danger" class="badge badge-danger badge-pill">?</span>
+    </li>
+    <li id="statsLinesMsg" class="list-group-item justify-content-between align-items-center" style="display: none;">
+        Сообщения об удалении
+        <span id="stat_msg" class="badge badge-warning badge-pill">?</span>
+    </li>
+</ul>
+{{end}}

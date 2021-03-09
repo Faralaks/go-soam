@@ -1,0 +1,16 @@
+{
+    "port":"80",
+    "address":"",
+    "mongoUrl":"mongodb://127.0.0.1:27017",
+    "dbName":"faralaks_soam",
+    "usersColName":"users",
+    "tokensColName":"tokens",
+    "resultsColName":"results",
+    "statsColName":"stats",
+    "curPath":".",
+    "pasSecret":"mysecretpaswhichneedstobe32bytes",
+    "accessSecret":"accesssecret",
+    "refreshSecret":"refreshsecret",
+    "atLifeTime": "10",
+    "rtLifeTime": "60"
+}
