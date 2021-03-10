@@ -1,16 +1,6 @@
 package hendlers
 
-import (
-	"context"
-	"fmt"
-	"github.com/360EntSecGroup-Skylar/excelize"
-	"go.mongodb.org/mongo-driver/bson"
-	"net/http"
-	"strconv"
-	"strings"
-	"time"
-	. "tools"
-)
+var B = `
 
 var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	filter := bson.M{"status": TesteeStatus}
@@ -130,7 +120,7 @@ var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/octet-stream")
-	w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="%v"`, filename))
+	w.Header().Set("Content-Disposition", fmt.Sprintf(attachment; filename="%v", filename))
 	w.Header().Set("File-Name", filename)
 	w.Header().Set("Content-Transfer-Encoding", "binary")
 	w.Header().Set("Expires", "0")
@@ -140,3 +130,4 @@ var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 })
+`

@@ -1,5 +1,6 @@
 package hendlers
 
+var D = `
 import (
 	"context"
 	"encoding/json"
@@ -12,7 +13,7 @@ import (
 )
 
 type UserDataResponse struct {
-	UserData *MultiUser `json:"userData"`
+	UserData *MultiUser json:"userData"
 }
 
 var Get_user_data = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -52,3 +53,4 @@ var Get_user_data = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request
 	}
 
 })
+`

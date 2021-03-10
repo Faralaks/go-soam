@@ -1,6 +1,7 @@
 package tools
 
 import (
+	"crypto/sha256"
 	"encoding/base64"
 )
 
@@ -36,4 +37,10 @@ func B64Dec(text string) (string, error) {
 		return "", err
 	}
 	return string(result), nil
+}
+
+func NewSHA256(data string) []byte {
+	byteData := []byte(data)
+	hash := sha256.Sum256(byteData)
+	return hash[:]
 }

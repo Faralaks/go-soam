@@ -4,7 +4,7 @@
         $.post("/login", $("#indexLoginForm").serialize()).done(function (response) {
             if (response.kind || !response.status) {
                 console.log(response);
-                $("#loginErr").text("Неверный логин или Пароль").show();
+                $("#loginErr").text("Неверный Логин или Пароль").show();
                 $("#passwordField").val("");
                 return;
             }
@@ -13,6 +13,21 @@
             $("#loginErr").text("Произошла неизвестная ошибка").show();
         })
     }
+
+    function sendSignupData() {
+        $.post("/signup", $("#signupForm").serialize()).done(function (response) {
+            if (response.kind) {
+                console.log(response);
+                $("#signErr").text("Неверный Логин или Пароль").show();
+                $("#passwordField").val("");
+                return;
+            }
+            document.location.replace("/testee");
+        }).fail(function (){
+            $("#signupErr").text("Произошла неизвестная ошибка").show();
+        })
+    }
+
     $("#indexPasswordField").ready(function () {$("#indexPasswordField").keyup(function(event){
         if(event.key === "Enter"){
             sendLoginData()
@@ -25,8 +40,18 @@
 {{template "head"}}
     <div class="row">
         <div class="col-md-12 mt-4">
-            <div class="card mx-auto" style="width: 18rem;">
-                <div class="card-body">
+            <div class="card mx-auto" style="width: 19rem;">
+
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#loginCard" onclick="$(signupCard).slideUp(); $(loginCard).slideDown();">Войти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#signupCard" onclick="$(signupCard).slideDown(); $(loginCard).slideUp();">Зарегистрироваться &nbsp;</a>
+                    </li>
+                </ul>
+
+                <div class="card-body" id="loginCard">
                     <h5 class="card-title">Добро пожаловать на сайт тестирований</h5>
                     <p class="card-sub text-danger">
                         ВНИМАНИЕ! Сайт доступен в режиме Beta-тестирования
@@ -43,8 +68,51 @@
 
                         <input type="button" class="btn btn-primary float-right" value="Войти" onclick="sendLoginData()">
                         <span id="loginErr" class="text-danger dn">Неверный Логин или Пароль!</span>
+
                     </form>
                 </div>
+
+                <div class="card-body dn" id="signupCard">
+                    <h5 class="card-title">Регистрация на сайте тестирований</h5>
+
+                    <form id="signupForm">
+                        <div class="form-group">
+                            <label for="indexSignupField">Придумайте Логин</label>
+                            <input class="form-control" id="indexSignupField" type="text" name="newLogin" placeholder="Логин" value="" maxlength="40">
+                        </div>
+                        <div class="form-group">
+                            <label for="indexNewPasswordField">Новый Пароль</label>
+                            <input type="password" class="form-control" id="indexNewPasswordField" name="newPassword"  maxlength="50" placeholder="Пароль" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="nameField">Ваше Имя</label>
+                            <input type="text" class="form-control" id="nameField" name="name"  maxlength="30" placeholder="Имя" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="surnameField">Ваша Фамилия</label>
+                            <input type="text" class="form-control" id="surnameField" name="surname"  maxlength="30" placeholder="Фамилия" value="">
+                        </div>
+                        <div class="form-group row">
+                            <div class="form-group" style="margin: auto">
+                                <label for="egeField">Возраст</label><br>
+                                <input type="number" class="form-control" id="egeField" name="ege"  min="1" max="99" placeholder="18" style="width: 90px">
+                            </div>
+                            <div class="form-group" style="margin: auto">
+                                <label for="gradeField">Класс</label><br>
+                                <input type="number" class="form-control" id="gradeField" name="grade"  min="1" max="11" placeholder="10"  style="width: 90px">
+                            </div>
+                        </div>
+
+                        <br>
+                        <input type="button" class="btn btn-primary float-right" value="Зарегистрироваться" onclick="sendSignupData()">
+                        <span id="signupErr" class="text-danger dn">Неверный Логин или Пароль!</span>
+
+                    </form>
+                </div>
+
+
+
+
             </div>
         </div>
     </div>

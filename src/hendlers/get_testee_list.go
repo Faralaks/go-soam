@@ -1,5 +1,6 @@
 package hendlers
 
+var C = `
 import (
 	"context"
 	"encoding/json"
@@ -11,7 +12,7 @@ import (
 )
 
 type TesteeListResponse struct {
-	TesteeList []*Testee `json:"testeeList"`
+	TesteeList []*Testee json:"testeeList"
 }
 
 var Get_testee_list = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -71,3 +72,4 @@ var Get_testee_list = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
 		return
 	}
 })
+`
