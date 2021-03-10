@@ -56,7 +56,7 @@ const MskOffset = 10800
 type User struct {
 	Uid          p.ObjectID `json:"uid" bson:"_id"`
 	Login        B64String  `json:"login" bson:"login"`
-	Pas          []byte     `json:"pas" bson:"pas"`
+	Pas          string     `json:"pas" bson:"pas"`
 	Status       string     `json:"status" bson:"status"`
 	CreatedDate  Timestamp  `json:"create_date" bson:"createdDate"`
 	ModifiedDate Timestamp  `json:"modifiedDate,omitempty" bson:"modifiedDate,omitempty"`
@@ -65,7 +65,7 @@ type User struct {
 type FullUser struct {
 	Uid          p.ObjectID `json:"uid" bson:"_id"`
 	Login        B64String  `json:"login" bson:"login"`
-	Pas          []byte     `json:"pas" bson:"pas"`
+	Pas          string     `json:"pas" bson:"pas"`
 	Status       string     `json:"status" bson:"status"`
 	CreatedDate  Timestamp  `json:"create_date" bson:"createdDate"`
 	ModifiedDate Timestamp  `json:"modifiedDate,omitempty" bson:"modifiedDate,omitempty"`

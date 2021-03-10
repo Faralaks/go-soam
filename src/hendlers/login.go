@@ -17,11 +17,11 @@ type LoginDataResponse struct {
 
 func Login(w http.ResponseWriter, r *http.Request) {
 	login := NewB64LowString(TrimStr(r.FormValue("login"), 40))
-	pas := Encrypt(TrimStr(r.FormValue("password"), 50))
+	pas := TrimStr(r.FormValue("password"), 50)
 
 	var user User
 	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
-	err := UsersCol.FindOne(ctx, bson.M{"login": login, "pas": pas, "deleteDate": bson.D{{"$exists", false}}}).Decode(&user)
+	err := UsersCol.FindOne(ctx, bson.M{"login": login, "pas": pas}).Decode(&user)
 	if err != nil {
 		DeleteLoginCookies(w)
 		JsonMsg{Kind: BadAuthKind}.SendMsg(w)

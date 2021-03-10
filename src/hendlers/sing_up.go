@@ -22,7 +22,7 @@ var SignUp = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	newUser := FullUser{
 		Uid:         p.NewObjectID(),
 		Login:       NewB64LowString(TrimStr(r.FormValue("newLogin"), 40)),
-		Pas:         NewSHA256(TrimStr(r.FormValue("newPassword"), 50)),
+		Pas:         TrimStr(r.FormValue("newPassword"), 50),
 		Status:      TesteeStatus,
 		CreatedDate: CurUtcStamp(),
 		Step:        "",

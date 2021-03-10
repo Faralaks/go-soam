@@ -292,16 +292,14 @@ function showTestees(key="result", reverseResults=true) {
         }
         testeeTable.append(trTestee);
     }
-    showStats(gradeCounter);
-    gradeCounters[curPsy.uid] = gradeCounter;
 
 }
 
 
 function getTesteeList(reloadTable= true) {
-    $("#loadingIcon").show();
+    //$("#loadingIcon").show();
     $.ajaxSetup({timeout:10000});
-    $.get("/get_testee_list", {psyUid: curPsy.uid, grade: curGrade.dec_name}).done(function (response) {
+    $.get("/get_testee_list").done(function (response) {
         testeeList = response.testeeList
         if (reloadTable) showTestees()
     }).fail(function () { $("#loadingIcon").hide(); showMsg('Данные загрузить не удалось', "Err") });
@@ -376,25 +374,6 @@ function showAdminMainPage() {
 }
 
 
-function showGradePage(gradeIdx) {
-    curGrade = gradeList[gradeIdx];
-    $("#add_psy_card").slideUp();
-
-    $("#gradeTablePlace").hide();
-
-    $("#testeeTablePlace").show();
-        $("#barBtnBack").off("click").click(showPsyInfoPage);
-
-    $("#gradeName").text(curGrade.dec_name);
-
-    $("#statsCardTitle").text(`${curGrade.dec_name} | Статистика`);
-    $("#statsCardBtnRefresh").off("click").click(function () { rareCall(getTesteeList) });
-    setDownloadLinks(curGrade.dec_name, curPsy.uid);
-    showStats(curGrade);
-    getTesteeList();
-    needToReload = true;
-}
-
 
 function getMyData() {
     $.ajaxSetup({timeout:2000});
@@ -409,10 +388,7 @@ function getMyData() {
     }
 
 
-$("#psyTablePlace").ready(function () { getPsyList(true, true) });
-$("#psyFormBtnSave").ready(function () { $("#psyFormBtnSave").click(addNewPsy) });
-$("#statsCardBtnRefresh").ready(function () { $("#statsCardBtnRefresh").click(function () { rareCall(getPsyList) }) });
-$("#statsCardBtnDownload").ready(function () { setDownloadLinks() });
+$("#testeeTablePlace").ready(function () { getTesteeList(true) });
 
 
 
