@@ -111,39 +111,6 @@ function rareCall(func, delay=1500) {
     }
 }
 
-function showStats(stats) {
-    let loading = $("#loadingIcon");
-    let statsPsyCount = $("#stat_psy_count");
-    if (stats.psyCount !== undefined)  {
-        $('#stat_psy_count').text(stats.psyCount);
-        $('#statsLinesPsyCount').toggleClass('d-none', false).toggleClass('d-flex', true)
-    }
-    else {
-        $('#statsLinesPsyCount').toggleClass('d-flex', false).toggleClass('d-none', true)
-    }
-    if (stats.gradeCount !== undefined)  {
-        $('#stat_grade_count').text(stats.gradeCount);
-        $('#statsLinesGradeCount').toggleClass('d-none', false).toggleClass('d-flex', true)
-    }
-    else {
-        $('#statsLinesGradeCount').toggleClass('d-flex', false).toggleClass('d-none', true)
-    }
-    loading.show();
-    statsPsyCount.text(stats.psy_count);
-    $('#stat_whole').text(stats.whole);
-    $('#stat_not_yet').text(stats.not_yet);
-    $('#stat_clear').text(stats.clear);
-    $('#stat_danger').text(stats.danger);
-    if (stats.msg)  {
-        $('#stat_msg').text(stats.msg);
-        $('#statsLinesMsg').toggleClass('d-flex', true)
-    }
-    else {
-        $('#statsLinesMsg').toggleClass('d-flex', false)
-    }
-    loading.hide();
-
-}
 
 function setLogin(user) {
     $("#barPlace").fadeIn(300);
@@ -189,4 +156,29 @@ function sendNewData() {
         showMsg(response.msg, response.kind)}).fail(function () {
         showMsg('Неизвестная ошибка во время запроса, возможно, соединение с сервером потеряно.', "Fatal")
     });
+}
+
+function validateText(elem){
+    let id =  elem.attr("id");
+    if (id === "psyFormIdent" && curPsy) return true
+    if(elem.val().match(/[^a-zA-Z0-9]/g) || !elem.val().length) {
+        elem.toggleClass("is-invalid", true);
+        $(`#${id}Msg`).text("Недопустимое значение");
+        return false;
+    }
+    elem.toggleClass("is-invalid", false);
+    return true;
+
+}
+
+function validateNum(elem){
+    if(elem.val().length && +elem.val() > 0) {
+        elem.toggleClass("is-invalid", false);
+        return true;
+
+    }
+    elem.toggleClass("is-invalid", true);
+    $(`#${elem.attr("id")}Msg`).text("Неверное значение");
+    return false;
+
 }
