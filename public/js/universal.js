@@ -115,8 +115,6 @@ function rareCall(func, delay=1500) {
 function setLogin(user) {
     $("#barPlace").fadeIn(300);
     $("#loginPlace").text(user.dec_login);
-    console.log(user)
-    console.log(user.modifiedDate,Math.ceil(((Date.now() / 1000 | 0) - user.modifiedDate) / 60) > 50)
     if (user.modifiedDate && Math.ceil(((Date.now() / 1000 | 0) - user.modifiedDate) / 60) > 50) $("#pasWarning").show(); //86400
 }
 

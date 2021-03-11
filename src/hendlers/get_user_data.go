@@ -31,7 +31,6 @@ var Get_user_data = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request
 	}
 
 	response.UserData.Pas = ""
-	VPrint(response.UserData.ModifiedDate)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)

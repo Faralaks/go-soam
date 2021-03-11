@@ -18,10 +18,10 @@ var Edit_user_data = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reques
 	}
 	userStatus := r.Header.Get("status")
 
-	oldPas := Encrypt(TrimStr(r.FormValue("password"), 50))
-	newPas := Encrypt(TrimStr(r.FormValue("newPassword"), 50))
+	oldPas := TrimStr(r.FormValue("password"), 50)
+	newPas := TrimStr(r.FormValue("newPassword"), 50)
 
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 2*time.Second)
 	result, err := UsersCol.UpdateOne(ctx, bson.M{"_id": userUid, "status": userStatus, "pas": oldPas}, bson.D{{"$set", bson.M{"modifiedDate": CurUtcStamp(), "pas": newPas}}})
 	if err != nil {
 		JsonMsg{Kind: FatalKind, Msg: "Произошла ошибка при смене данных пользователя | " + err.Error()}.SendMsg(w)

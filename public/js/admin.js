@@ -1,46 +1,9 @@
-let psyList, gradeList, testeeList;
-let curPsy, curGrade;
-let gradeCounters = {};
-let fullCounter;
-let needToReload = false;
+let testeeList;
 let myData;
 
-function setToDefault() {
-    curPsy.dec_login = title(b64dec(curPsy.login));
-    curPsy.dec_ident = title(b64dec(curPsy.ident));
-    if (!curPsy.tests) curPsy.tests = [];
-    $("#psyFormBtnSave").prop("disabled", true);
-    $("#psyFormLogin").val(curPsy.dec_login);
-    $("#psyFormPas").val(curPsy.pas);
-    $("#psyFormIdent").val(curPsy.dec_ident).prop("disabled", true);
-    $("#psyFormCount").val(curPsy.count);
-
-    $("input").prop("checked", false);
-    curPsy.tests.forEach(function (testNumber) {
-        $("#test"+testNumber).prop("checked", true)
-    })
-
-    $("#psyFormCheckDel").prop("checked", curPsy.pre_del !== ZeroDate);
-
-}
-
-function saveCurPsy() {
-    curPsy.dec_login = $("#psyFormLogin").val();
-    curPsy.pas = $("#psyFormPas").val();
-    curPsy.count = $("#psyFormCount").val();
-    curPsy.pre_del = $("#psyFormCheckDel").prop("checked");
-    curPsy.tests = [];
-    $('.testCheckbox:checked').each(function() { curPsy.tests.push(this.value); });
-}
 
 
-
-function validateFormData(login=$("#psyFormLogin"), pas=$("#psyFormPas"), ident=$("#psyFormIdent"), count=$("#psyFormCount")) {
-    $("#psyFormBtnSave").prop("disabled", !(+validateText(login) + validatePas(pas) + validateText(ident) + validateNum(count) === 4));
-}
-
-
-function acceptDel(testeeUid, btn) {
+function delResult(testeeUid, btn) {
     $.ajaxSetup({timeout:3000});
     $.post("/accept_del", {testeeUid: testeeUid}).done(function (response) {
         showMsg(response.msg, response.kind, function () {
@@ -53,6 +16,7 @@ function acceptDel(testeeUid, btn) {
         showMsg("Превышено время ожидания или произошла ошибка на стороне сервера! Операция не выполнена!");
     })
 }
+
 
 function showTestees(key="result", reverseResults=true) {
     let testeeTable = $("#testeeTable");

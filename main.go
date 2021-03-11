@@ -22,15 +22,14 @@ func main() {
 	r.HandleFunc("/", Index).Methods("GET")
 	r.HandleFunc("/signup", SignUp).Methods("POST")
 	r.HandleFunc("/login", Login).Methods("POST")
-
 	r.HandleFunc("/admin", AdminPage).Methods("GET")
 
 	r.Handle("/get_testee_list", AuthMiddleware(Get_testee_list, AdminAccess)).Methods("GET")
 
 	r.Handle("/get_user_data", AuthMiddleware(Get_user_data, AllAccess)).Methods("GET")
+	r.Handle("/edit_user_data", AuthMiddleware(Edit_user_data, AdminAccess)).Methods("POST")
 
-	//r.Handle("/accept_del", AuthMiddleware(Accept_del, AdminAccess)).Methods("POST")
-	//r.Handle("/edit_user_data", AuthMiddleware(Edit_user_data, AdminAccess)).Methods("POST")
+	//r.Handle("/del_result", AuthMiddleware(Accept_del, AdminAccess)).Methods("POST")
 	//r.Handle("/download", AuthMiddleware(Download, AdminAccess)).Methods("GET")
 
 	r.HandleFunc("/remake", remakeDb).Methods("GET")
