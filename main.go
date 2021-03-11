@@ -27,8 +27,9 @@ func main() {
 
 	r.Handle("/get_testee_list", AuthMiddleware(Get_testee_list, AdminAccess)).Methods("GET")
 
+	r.Handle("/get_user_data", AuthMiddleware(Get_user_data, AllAccess)).Methods("GET")
+
 	//r.Handle("/accept_del", AuthMiddleware(Accept_del, AdminAccess)).Methods("POST")
-	//r.Handle("/get_user_data", AuthMiddleware(Get_user_data, AllAccess)).Methods("GET")
 	//r.Handle("/edit_user_data", AuthMiddleware(Edit_user_data, AdminAccess)).Methods("POST")
 	//r.Handle("/download", AuthMiddleware(Download, AdminAccess)).Methods("GET")
 

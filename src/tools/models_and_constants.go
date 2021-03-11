@@ -65,14 +65,14 @@ type User struct {
 type FullUser struct {
 	Uid          p.ObjectID `json:"uid" bson:"_id"`
 	Login        B64String  `json:"login" bson:"login"`
-	Pas          string     `json:"pas" bson:"pas"`
+	Pas          string     `json:"pas,omitempty" bson:"pas"`
 	Status       string     `json:"status" bson:"status"`
 	CreatedDate  Timestamp  `json:"create_date" bson:"createdDate"`
 	ModifiedDate Timestamp  `json:"modifiedDate,omitempty" bson:"modifiedDate,omitempty"`
-	Step         string     `json:"step" bson:"step"`
-	Result       int8       `json:"result" bson:"result"`
-	Name         string     `json:"name" bson:"name"`
-	BirthYear    uint16     `json:"birthYear" bson:"birthYear"`
-	Ege          uint8      `json:"ege" bson:"ege"`
-	Grade        uint8      `json:"grade" bson:"grade"`
+	Step         string     `json:"step,omitempty" bson:"step"`
+	Result       int8       `json:"result,omitempty" bson:"result"`
+	Name         string     `json:"name,omitempty" bson:"name"`
+	BirthYear    uint16     `json:"birthYear,omitempty" bson:"birthYear"`
+	Ege          uint8      `json:"ege,omitempty" bson:"ege"`
+	Grade        uint8      `json:"grade,omitempty" bson:"grade"`
 }
