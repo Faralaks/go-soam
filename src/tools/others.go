@@ -29,6 +29,7 @@ type configType struct {
 	TokensColName  string
 	ResultsColName string
 	StatsColName   string
+	TestList       []string
 }
 
 var configData map[string]string

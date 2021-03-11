@@ -26,6 +26,8 @@ func main() {
 
 	r.Handle("/get_testee_list", AuthMiddleware(Get_testee_list, AdminAccess)).Methods("GET")
 
+	r.Handle("/testee", AuthMiddleware(TesteePage, TesteeAccess)).Methods("GET")
+
 	r.Handle("/get_user_data", AuthMiddleware(Get_user_data, AllAccess)).Methods("GET")
 	r.Handle("/edit_user_data", AuthMiddleware(Edit_user_data, AdminAccess)).Methods("POST")
 
@@ -50,13 +52,14 @@ var remakeDb = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	UsersCol.DeleteMany(context.TODO(), bson.M{})
 	TokensCol.DeleteMany(context.TODO(), bson.M{})
 	u := User{
-		Uid:         p.NewObjectID(),
-		Login:       NewB64String("master"),
-		Pas:         "",
-		Status:      AdminStatus,
-		CreatedDate: CurUtcStamp(),
+		Uid:          p.NewObjectID(),
+		Login:        NewB64String("master"),
+		Pas:          "",
+		Status:       AdminStatus,
+		CreatedDate:  CurUtcStamp(),
+		ModifiedDate: CurUtcStamp(),
 	}
-	UsersCol.InsertOne(context.TODO(), u)
+	_, _ = UsersCol.InsertOne(context.TODO(), u)
 
 	//UsersCol.InsertOne(context.TODO(), p)
 	w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")

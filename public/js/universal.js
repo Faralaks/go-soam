@@ -40,7 +40,7 @@ function showMsg(msg, kind,  sucFunc=function () {}, field="") {
             $("#updateErr").show();
             return;
         case "Relogin":
-            alert("Ваша сессия истекла, необзодимо войти повторно.")
+            alert("Ваша сессия истекла, необходимо войти повторно.")
             document.location.replace("/");
             return;
 

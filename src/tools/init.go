@@ -64,8 +64,8 @@ func init() {
 	Config.DbName = configData["dbName"]
 	Config.UsersColName = configData["usersColName"]
 	Config.TokensColName = configData["tokensColName"]
+	Config.TestList = strings.Split(configData["testList"], ",")
 	FeedBack <- "Config is Ready!"
-
 	client, err := mongo.NewClient(options.Client().ApplyURI(Config.MongoUrl))
 	if err != nil {
 		VPrint(err.Error())

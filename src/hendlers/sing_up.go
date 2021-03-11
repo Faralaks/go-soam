@@ -25,7 +25,7 @@ var SignUp = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		Pas:         TrimStr(r.FormValue("newPassword"), 50),
 		Status:      TesteeStatus,
 		CreatedDate: CurUtcStamp(),
-		Step:        "",
+		Step:        Config.TestList[0],
 		Name:        Encrypt(TrimStr(r.FormValue("name"), 20) + " " + TrimStr(r.FormValue("surname"), 30)),
 		BirthYear:   uint16(time.Now().Year() - ege),
 		Ege:         uint8(ege),
@@ -43,6 +43,13 @@ var SignUp = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
+
+	signedAt, signedRt, err := CreateTokens(newUser.Uid.Hex(), newUser.Status)
+	if err != nil {
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось создать токены | " + err.Error()}.SendMsg(w)
+		return
+	}
+	SetLoginCookies(w, signedAt, signedRt)
 
 	JsonMsg{Kind: SucKind}.SendMsg(w)
 

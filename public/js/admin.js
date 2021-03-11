@@ -28,7 +28,7 @@ function showTestees(key="result", reverseResults=true) {
         let testee = testeeList[i];
         let trTestee = $("<tr></tr>")
             .append($(`<td>${b64dec(testee.login)}</td>`).click(function () { copyText(this) }))
-            .append($(`<td>${testee.pas}</td>`).click(function () { copyText(this) }))
+            .append($(`<td>${testee.pas || ""}</td>`).click(function () { copyText(this) }))
             .append($(`<td>${testee.ege}</td>`))
             .append($(`<td>${testee.grade}</td>`))
             .append($(`<td>${stamp2str(testee.create_date)}</td>`));

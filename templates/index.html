@@ -16,16 +16,13 @@
 
     function sendSignupData() {
         $.post("/signup", $("#signupForm").serialize()).done(function (response) {
-            if (response.kind) {
-                console.log(response);
-                $("#signErr").text("Неверный Логин или Пароль").show();
-                $("#passwordField").val("");
+            console.log(response)
+            if (response.kind !== "Suc") {
+                $("#signupErr").text(response.msg).show();
                 return;
             }
             document.location.replace("/testee");
-        }).fail(function (){
-            $("#signupErr").text("Произошла неизвестная ошибка").show();
-        })
+        }).fail(function (){ $("#signupErr").text("Произошла неизвестная ошибка").show(); })
     }
 
     $("#indexPasswordField").ready(function () {$("#indexPasswordField").keyup(function(event){
@@ -77,12 +74,12 @@
 
                     <form id="signupForm">
                         <div class="form-group">
-                            <label for="indexSignupField">Придумайте Логин</label>
-                            <input class="form-control" id="indexSignupField" type="text" name="newLogin" placeholder="Логин" value="" maxlength="40">
+                            <label for="signupLoginField">Придумайте Логин</label>
+                            <input class="form-control" id="signupLoginField" type="text" name="newLogin" placeholder="Логин" value="" maxlength="40">
                         </div>
                         <div class="form-group">
-                            <label for="indexNewPasswordField">Новый Пароль</label>
-                            <input type="password" class="form-control" id="indexNewPasswordField" name="newPassword"  maxlength="50" placeholder="Пароль" value="">
+                            <label for="signupPasswordField">Новый Пароль</label>
+                            <input type="password" class="form-control" id="signupPasswordField" name="newPassword"  maxlength="50" placeholder="Пароль" value="">
                         </div>
                         <div class="form-group">
                             <label for="nameField">Ваше Имя</label>
@@ -104,8 +101,8 @@
                         </div>
 
                         <br>
-                        <input type="button" class="btn btn-primary float-right" value="Зарегистрироваться" onclick="sendSignupData()">
-                        <span id="signupErr" class="text-danger dn">Неверный Логин или Пароль!</span>
+                        <input type="button" class="btn btn-primary float-right" value="Зарегистрироваться" onclick="sendSignupData()"><br><br>
+                        <span id="signupErr" class="text-danger">Неверный Логин или Пароль!</span>
 
                     </form>
                 </div>

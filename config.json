@@ -12,5 +12,6 @@
     "accessSecret":"accesssecret",
     "refreshSecret":"refreshsecret",
     "atLifeTime": "10",
-    "rtLifeTime": "60"
+    "rtLifeTime": "60",
+    "testList": "BPAQ, ITO"
 }
