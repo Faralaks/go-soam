@@ -1,4 +1,4 @@
-package hendlers
+package handlers
 
 import (
 	"context"
@@ -51,7 +51,7 @@ func AdminPage(w http.ResponseWriter, r *http.Request) {
 var TesteePage = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	curUserUid, err := p.ObjectIDFromHex(r.Header.Get("owner"))
 	if err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "Не удалось преобразовать uid в ObjectID | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось преобразовать uid в ObjectID | " + err.Error()}.Send(w)
 		return
 	}
 
@@ -59,7 +59,7 @@ var TesteePage = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	ctx, _ := context.WithTimeout(context.Background(), 2*time.Second)
 	err = UsersCol.FindOne(ctx, bson.M{"_id": curUserUid}).Decode(&user)
 	if err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "Не удалось получить данные пользователя | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось получить данные пользователя | " + err.Error()}.Send(w)
 		return
 	}
 

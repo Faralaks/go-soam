@@ -1,4 +1,4 @@
-package hendlers
+package handlers
 
 import (
 	"net/http"
@@ -13,18 +13,18 @@ func AuthMiddleware(next http.Handler, allowList *[]string) http.Handler {
 				RefreshMiddleware(cookieRt, allowList, w, r, next)
 				return
 			}
-			JsonMsg{Kind: ReloginKind, Msg: "Не были получены необходимые ключи"}.SendMsg(w)
+			JsonMsg{Kind: ReloginKind, Msg: "Не были получены необходимые ключи"}.Send(w)
 			return
 		}
 		at := cookieAt.Value
 		claims, err := ExtractToken(at, Config.AccessSecret)
 		if err != nil {
-			JsonMsg{Kind: FatalKind, Msg: "Недействительный ключ авторизации | " + err.Error()}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "Недействительный ключ авторизации | " + err.Error()}.Send(w)
 			return
 		}
 
 		if !IsAllowed(claims["status"].(string), allowList) {
-			JsonMsg{Kind: ReloginKind, Msg: "Отказано в доступе"}.SendMsg(w)
+			JsonMsg{Kind: ReloginKind, Msg: "Отказано в доступе"}.Send(w)
 			return
 		}
 

@@ -1,4 +1,4 @@
-package hendlers
+package handlers
 
 import (
 	"context"
@@ -19,7 +19,7 @@ var Get_testee_list = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
 	ctx, _ := context.WithTimeout(context.Background(), 4*time.Second)
 	cur, err := UsersCol.Find(ctx, bson.M{"status": TesteeStatus})
 	if err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "Не удалось извлечь список испытуемых | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось извлечь список испытуемых | " + err.Error()}.Send(w)
 		return
 	}
 	defer cur.Close(context.TODO())
@@ -29,7 +29,7 @@ var Get_testee_list = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
 		var elem FullUser
 		err := cur.Decode(&elem)
 		if err != nil {
-			JsonMsg{Kind: FatalKind, Msg: "В процессе декодирования испытуемых произошла ошибка | " + err.Error()}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "В процессе декодирования испытуемых произошла ошибка | " + err.Error()}.Send(w)
 			return
 		}
 		elem.Pas = elem.Pas
@@ -37,7 +37,7 @@ var Get_testee_list = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
 	}
 
 	if err := cur.Err(); err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "У курсора произошла ошибка | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "У курсора произошла ошибка | " + err.Error()}.Send(w)
 		return
 	}
 
@@ -45,7 +45,7 @@ var Get_testee_list = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
 	w.WriteHeader(http.StatusOK)
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "В процессе конвертации в json возникла ошибка | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "В процессе конвертации в json возникла ошибка | " + err.Error()}.Send(w)
 		return
 	}
 })

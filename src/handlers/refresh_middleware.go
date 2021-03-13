@@ -1,4 +1,4 @@
-package hendlers
+package handlers
 
 import (
 	"context"
@@ -12,7 +12,7 @@ func RefreshMiddleware(cookieRt *http.Cookie, allowList *[]string, w http.Respon
 	rt := cookieRt.Value
 	claims, err := ExtractToken(rt, Config.RefreshSecret)
 	if err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "Недействительный ключ обновления | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "Недействительный ключ обновления | " + err.Error()}.Send(w)
 		return
 	}
 	var rtd TokenData
@@ -25,7 +25,7 @@ func RefreshMiddleware(cookieRt *http.Cookie, allowList *[]string, w http.Respon
 
 		DeleteLoginCookies(w)
 
-		JsonMsg{Kind: ReloginKind, Msg: "Веронятно, ваш ключ обновления скомпромитирован, рекомендуется сменить пароль | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: ReloginKind, Msg: "Веронятно, ваш ключ обновления скомпромитирован, рекомендуется сменить пароль | " + err.Error()}.Send(w)
 		return
 	}
 
@@ -36,13 +36,13 @@ func RefreshMiddleware(cookieRt *http.Cookie, allowList *[]string, w http.Respon
 	}
 	newAt, newRt, err := CreateTokens(rtd.Owner, rtd.Status)
 	if err != nil {
-		JsonMsg{Kind: ReloginKind, Msg: "Не удалось создать новые токены | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: ReloginKind, Msg: "Не удалось создать новые токены | " + err.Error()}.Send(w)
 		return
 	}
 	SetLoginCookies(w, newAt, newRt)
 
 	if !IsAllowed(rtd.Status, allowList) {
-		JsonMsg{Kind: ReloginKind, Msg: "Отказано в доступе"}.SendMsg(w)
+		JsonMsg{Kind: ReloginKind, Msg: "Отказано в доступе"}.Send(w)
 		return
 	}
 

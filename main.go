@@ -6,7 +6,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	p "go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/net/context"
-	. "hendlers"
+	. "handlers"
 	"net/http"
 	"os"
 	. "tools"
@@ -24,12 +24,13 @@ func main() {
 	r.HandleFunc("/login", Login).Methods("POST")
 	r.HandleFunc("/admin", AdminPage).Methods("GET")
 
+	r.Handle("/get_user_data", AuthMiddleware(Get_user_data, AllAccess)).Methods("GET")
+
 	r.Handle("/get_testee_list", AuthMiddleware(Get_testee_list, AdminAccess)).Methods("GET")
+	r.Handle("/edit_user_data", AuthMiddleware(Edit_user_data, AdminAccess)).Methods("POST")
 
 	r.Handle("/testee", AuthMiddleware(TesteePage, TesteeAccess)).Methods("GET")
-
-	r.Handle("/get_user_data", AuthMiddleware(Get_user_data, AllAccess)).Methods("GET")
-	r.Handle("/edit_user_data", AuthMiddleware(Edit_user_data, AdminAccess)).Methods("POST")
+	r.Handle("/save_answers", AuthMiddleware(Save_answers, TesteeAccess)).Methods("POST")
 
 	//r.Handle("/del_result", AuthMiddleware(Accept_del, AdminAccess)).Methods("POST")
 	//r.Handle("/download", AuthMiddleware(Download, AdminAccess)).Methods("GET")

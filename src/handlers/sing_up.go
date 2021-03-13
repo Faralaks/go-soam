@@ -1,4 +1,4 @@
-package hendlers
+package handlers
 
 import (
 	"context"
@@ -15,7 +15,7 @@ var SignUp = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	grade, err := strconv.Atoi(r.FormValue("grade"))
 
 	if err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "Недопустимое значение в одном из полей: Возраст, Класс | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "Недопустимое значение в одном из полей: Возраст, Класс | " + err.Error()}.Send(w)
 		return
 	}
 
@@ -37,20 +37,20 @@ var SignUp = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		errCode := err.(mongo.WriteException).WriteErrors[0].Code
 		if errCode == 11000 {
-			JsonMsg{Kind: DuplicateKeyKind, Field: "newLogin"}.SendMsg(w)
+			JsonMsg{Kind: DuplicateKeyKind, Field: "newLogin"}.Send(w)
 		} else {
-			JsonMsg{Kind: FatalKind, Msg: "Не удалось сохранить нового пользователя в базу данных | " + err.Error()}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "Не удалось сохранить нового пользователя в базу данных | " + err.Error()}.Send(w)
 		}
 		return
 	}
 
 	signedAt, signedRt, err := CreateTokens(newUser.Uid.Hex(), newUser.Status)
 	if err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "Не удалось создать токены | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось создать токены | " + err.Error()}.Send(w)
 		return
 	}
 	SetLoginCookies(w, signedAt, signedRt)
 
-	JsonMsg{Kind: SucKind}.SendMsg(w)
+	JsonMsg{Kind: SucKind}.Send(w)
 
 })

@@ -1,4 +1,4 @@
-package hendlers
+package handlers
 
 import (
 	"context"
@@ -24,13 +24,13 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	err := UsersCol.FindOne(ctx, bson.M{"login": login, "pas": pas}).Decode(&user)
 	if err != nil {
 		DeleteLoginCookies(w)
-		JsonMsg{Kind: BadAuthKind}.SendMsg(w)
+		JsonMsg{Kind: BadAuthKind}.Send(w)
 		return
 	}
 
 	signedAt, signedRt, err := CreateTokens(user.Uid.Hex(), user.Status)
 	if err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "Не удалось создать токены | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось создать токены | " + err.Error()}.Send(w)
 		return
 	}
 	SetLoginCookies(w, signedAt, signedRt)

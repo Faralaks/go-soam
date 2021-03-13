@@ -1,4 +1,4 @@
-package hendlers
+package handlers
 
 var B = `
 
@@ -24,18 +24,18 @@ var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 		cur, err := UsersCol.Find(ctx, filter)
 		if err != nil {
-			JsonMsg{Kind: FatalKind, Msg: "Не удалось извлечь список испытуемых | " + err.Error()}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "Не удалось извлечь список испытуемых | " + err.Error()}.Send(w)
 			return
 		}
 		if cur == nil {
-			JsonMsg{Kind: FatalKind, Msg: "ТАКОГО НЕ МОЖЕТ СЛУЧИТСЯ, ПОТОМУ ЧТО НЕ МОЖЕТ. КУРСОР, МАТЬ ЕГО, СТАЛ NIL"}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "ТАКОГО НЕ МОЖЕТ СЛУЧИТСЯ, ПОТОМУ ЧТО НЕ МОЖЕТ. КУРСОР, МАТЬ ЕГО, СТАЛ NIL"}.Send(w)
 			return
 		}
 		defer cur.Close(context.TODO())
 
 		file, err = excelize.OpenFile(Config.CurPath + "/not_yet_template.xlsx")
 		if err != nil {
-			JsonMsg{Kind: FatalKind, Msg: "Не удалось открыть заготовку not_yet_template.xlsx | " + err.Error()}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "Не удалось открыть заготовку not_yet_template.xlsx | " + err.Error()}.Send(w)
 			return
 		}
 		row := 2
@@ -44,13 +44,13 @@ var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			var elem Testee
 			err := cur.Decode(&elem)
 			if err != nil {
-				JsonMsg{Kind: FatalKind, Msg: "В процессе декодирования испытуемых произошла ошибка | " + err.Error()}.SendMsg(w)
+				JsonMsg{Kind: FatalKind, Msg: "В процессе декодирования испытуемых произошла ошибка | " + err.Error()}.Send(w)
 				return
 			}
 			pas, err := Decrypt(elem.Pas)
 			login := elem.Login.Decode()
 			if err != nil {
-				JsonMsg{Kind: FatalKind, Msg: fmt.Sprintf("В процессе дешифрования пароля пользователя %v произошла ошибка | %v", elem.Login.Decode(), err.Error())}.SendMsg(w)
+				JsonMsg{Kind: FatalKind, Msg: fmt.Sprintf("В процессе дешифрования пароля пользователя %v произошла ошибка | %v", elem.Login.Decode(), err.Error())}.Send(w)
 				return
 			}
 			_ = file.SetCellValue("Логины", "A"+strconv.Itoa(row), login)
@@ -62,7 +62,7 @@ var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			row++
 		}
 		if err := cur.Err(); err != nil {
-			JsonMsg{Kind: FatalKind, Msg: "У курсора произошла ошибка | " + err.Error()}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "У курсора произошла ошибка | " + err.Error()}.Send(w)
 			return
 		}
 		filename = "Логины.xlsx"
@@ -72,18 +72,18 @@ var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 		cur, err := UsersCol.Find(ctx, filter)
 		if err != nil {
-			JsonMsg{Kind: FatalKind, Msg: "Не удалось извлечь список испытуемых | " + err.Error()}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "Не удалось извлечь список испытуемых | " + err.Error()}.Send(w)
 			return
 		}
 		if cur == nil {
-			JsonMsg{Kind: FatalKind, Msg: "ТАКОГО НЕ МОЖЕТ СЛУЧИТСЯ, ПОТОМУ ЧТО НЕ МОЖЕТ. КУРСОР, МАТЬ ЕГО, СТАЛ NIL"}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "ТАКОГО НЕ МОЖЕТ СЛУЧИТСЯ, ПОТОМУ ЧТО НЕ МОЖЕТ. КУРСОР, МАТЬ ЕГО, СТАЛ NIL"}.Send(w)
 			return
 		}
 		defer cur.Close(context.TODO())
 
 		file, err = excelize.OpenFile(Config.CurPath + "/done_template.xlsx")
 		if err != nil {
-			JsonMsg{Kind: FatalKind, Msg: "Не удалось открыть заготовку done_template.xlsx | " + err.Error()}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "Не удалось открыть заготовку done_template.xlsx | " + err.Error()}.Send(w)
 			return
 		}
 		row := 2
@@ -93,7 +93,7 @@ var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			var rowStr = strconv.Itoa(row)
 			err := cur.Decode(&elem)
 			if err != nil {
-				JsonMsg{Kind: FatalKind, Msg: "В процессе декодирования испытуемых произошла ошибка | " + err.Error()}.SendMsg(w)
+				JsonMsg{Kind: FatalKind, Msg: "В процессе декодирования испытуемых произошла ошибка | " + err.Error()}.Send(w)
 				return
 			}
 
@@ -106,7 +106,7 @@ var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			row++
 		}
 		if err := cur.Err(); err != nil {
-			JsonMsg{Kind: FatalKind, Msg: "У курсора произошла ошибка | " + err.Error()}.SendMsg(w)
+			JsonMsg{Kind: FatalKind, Msg: "У курсора произошла ошибка | " + err.Error()}.Send(w)
 			return
 		}
 		for row := 2; row < 9; row++ {
@@ -126,7 +126,7 @@ var Download = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Expires", "0")
 	err := file.Write(w)
 	if err != nil {
-		JsonMsg{Kind: FatalKind, Msg: "В процессе конвертации в json возникла ошибка | " + err.Error()}.SendMsg(w)
+		JsonMsg{Kind: FatalKind, Msg: "В процессе конвертации в json возникла ошибка | " + err.Error()}.Send(w)
 		return
 	}
 })

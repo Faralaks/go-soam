@@ -75,7 +75,7 @@ type JsonMsg struct {
 	Field string `json:"field,omitempty"`
 }
 
-func (jm JsonMsg) SendMsg(w http.ResponseWriter) {
+func (jm JsonMsg) Send(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	_ = json.NewEncoder(w).Encode(jm)
