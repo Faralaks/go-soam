@@ -1,761 +1,755 @@
 {{define "scripts"}}
-    <script src="/js/universal.js" type="text/javascript"></script>
-    <script>
+<script src="/js/universal.js" type="text/javascript"></script>
+<script>
+    function sendData() {
+        let elems = $(".questionBody");
+        for (let i = 0; i < elems.length; i++) {
+            let e = $(elems[i]);
+            if (e.find("input:radio:checked").length !== 1) {
+                e.parent().children().first().css("background", "lightgrey");
+                $('body,html').animate({scrollTop: e.parent().offset().top}, 400);
+                break
+            }
 
-    </script>
+        }
+    }
+
+
+    $(".card-body").ready(function () { $("input:radio").change(function () { $(this).parent().parent().parent().children().first().css('background', 'white') }) });
+</script>
 {{end}}
 {{define "styles"}}
 {{end}}
 {{define "blank"}}
     {{template "head"}}
-
     <h1 style="margin: auto">Тестовый бланк №1</h1><br>
 
 
 
-    <div class="card mb-5" id="card1">
-        <div class="card-header">Вопрос 1</div>
-        <div class="card-body">
-            <h5 class="card-title">Иногда я не могу сдержать желание ударить другого человека</h5>
+<div class="card mb-5 questionCard" id="card1">
+    <div class="card-header">Вопрос 1 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign1"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Иногда я не могу сдержать желание ударить другого человека</h5>
 
-            <div class="form-check">
-                <input id="q1a1" class="form-check-input" type="radio" name="q1"  value="1">
-                <label for="q1a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q1a2" class="form-check-input" type="radio" name="q1"  value="2">
-                <label for="q1a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q1a3" class="form-check-input" type="radio" name="q1"  value="3">
-                <label for="q1a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q1a4" class="form-check-input" type="radio" name="q1"  value="4">
-                <label for="q1a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q1a5" class="form-check-input" type="radio" name="q1"  value="5">
-                <label for="q1a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q1a1" class="form-check-input" type="radio" name="q1"  value="1" onchange="$(checkSign1).show()">
+            <label for="q1a1" class="form-check-label">Очень на меня не похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card2">
-        <div class="card-header">Вопрос 2</div>
-        <div class="card-body">
-            <h5 class="card-title">Я быстро вспыхиваю, но и быстро остываю</h5>
-
-            <div class="form-check">
-                <input id="q2a1" class="form-check-input" type="radio" name="q2"  value="1">
-                <label for="q2a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q2a2" class="form-check-input" type="radio" name="q2"  value="2">
-                <label for="q2a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q2a3" class="form-check-input" type="radio" name="q2"  value="3">
-                <label for="q2a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q2a4" class="form-check-input" type="radio" name="q2"  value="4">
-                <label for="q2a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q2a5" class="form-check-input" type="radio" name="q2"  value="5">
-                <label for="q2a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q1a2" class="form-check-input" type="radio" name="q1"  value="2" onchange="$(checkSign1).show()">
+            <label for="q1a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card3">
-        <div class="card-header">Вопрос 3</div>
-        <div class="card-body">
-            <h5 class="card-title">Бывает, что я просто схожу с ума от ревности</h5>
-
-            <div class="form-check">
-                <input id="q3a1" class="form-check-input" type="radio" name="q3"  value="1">
-                <label for="q3a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q3a2" class="form-check-input" type="radio" name="q3"  value="2">
-                <label for="q3a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q3a3" class="form-check-input" type="radio" name="q3"  value="3">
-                <label for="q3a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q3a4" class="form-check-input" type="radio" name="q3"  value="4">
-                <label for="q3a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q3a5" class="form-check-input" type="radio" name="q3"  value="5">
-                <label for="q3a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q1a3" class="form-check-input" type="radio" name="q1"  value="3" onchange="$(checkSign1).show()">
+            <label for="q1a3" class="form-check-label">Нечто среднее</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card4">
-        <div class="card-header">Вопрос 4</div>
-        <div class="card-body">
-            <h5 class="card-title">Если меня спровоцировать, я могу ударить другого человека</h5>
-
-            <div class="form-check">
-                <input id="q4a1" class="form-check-input" type="radio" name="q4"  value="1">
-                <label for="q4a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q4a2" class="form-check-input" type="radio" name="q4"  value="2">
-                <label for="q4a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q4a3" class="form-check-input" type="radio" name="q4"  value="3">
-                <label for="q4a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q4a4" class="form-check-input" type="radio" name="q4"  value="4">
-                <label for="q4a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q4a5" class="form-check-input" type="radio" name="q4"  value="5">
-                <label for="q4a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q1a4" class="form-check-input" type="radio" name="q1"  value="4" onchange="$(checkSign1).show()">
+            <label for="q1a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card5">
-        <div class="card-header">Вопрос 5</div>
-        <div class="card-body">
-            <h5 class="card-title">Я раздражаюсь, когда у меня что-то не получается</h5>
-
-            <div class="form-check">
-                <input id="q5a1" class="form-check-input" type="radio" name="q5"  value="1">
-                <label for="q5a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q5a2" class="form-check-input" type="radio" name="q5"  value="2">
-                <label for="q5a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q5a3" class="form-check-input" type="radio" name="q5"  value="3">
-                <label for="q5a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q5a4" class="form-check-input" type="radio" name="q5"  value="4">
-                <label for="q5a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q5a5" class="form-check-input" type="radio" name="q5"  value="5">
-                <label for="q5a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q1a5" class="form-check-input" type="radio" name="q1"  value="5" onchange="$(checkSign1).show()">
+            <label for="q1a5" class="form-check-label">Очень на меня похоже</label>
         </div>
+
     </div>
+</div>
 
 
-    <div class="card mb-5" id="card6">
-        <div class="card-header">Вопрос 6</div>
-        <div class="card-body">
-            <h5 class="card-title">Временами мне кажется, что жизнь мне что-то не додала</h5>
+<div class="card mb-5 questionCard" id="card2">
+    <div class="card-header">Вопрос 2 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign2"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Я быстро вспыхиваю, но и быстро остываю</h5>
 
-            <div class="form-check">
-                <input id="q6a1" class="form-check-input" type="radio" name="q6"  value="1">
-                <label for="q6a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q6a2" class="form-check-input" type="radio" name="q6"  value="2">
-                <label for="q6a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q6a3" class="form-check-input" type="radio" name="q6"  value="3">
-                <label for="q6a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q6a4" class="form-check-input" type="radio" name="q6"  value="4">
-                <label for="q6a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q6a5" class="form-check-input" type="radio" name="q6"  value="5">
-                <label for="q6a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q2a1" class="form-check-input" type="radio" name="q2"  value="1" onchange="$(checkSign2).show()">
+            <label for="q2a1" class="form-check-label">Очень на меня не похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card7">
-        <div class="card-header">Вопрос 7</div>
-        <div class="card-body">
-            <h5 class="card-title">Если кто-то ударит меня, я дам сдачи</h5>
-
-            <div class="form-check">
-                <input id="q7a1" class="form-check-input" type="radio" name="q7"  value="1">
-                <label for="q7a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q7a2" class="form-check-input" type="radio" name="q7"  value="2">
-                <label for="q7a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q7a3" class="form-check-input" type="radio" name="q7"  value="3">
-                <label for="q7a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q7a4" class="form-check-input" type="radio" name="q7"  value="4">
-                <label for="q7a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q7a5" class="form-check-input" type="radio" name="q7"  value="5">
-                <label for="q7a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q2a2" class="form-check-input" type="radio" name="q2"  value="2" onchange="$(checkSign2).show()">
+            <label for="q2a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card8">
-        <div class="card-header">Вопрос 8</div>
-        <div class="card-body">
-            <h5 class="card-title">Иногда я чувствую, что вот-вот взорвусь</h5>
-
-            <div class="form-check">
-                <input id="q8a1" class="form-check-input" type="radio" name="q8"  value="1">
-                <label for="q8a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q8a2" class="form-check-input" type="radio" name="q8"  value="2">
-                <label for="q8a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q8a3" class="form-check-input" type="radio" name="q8"  value="3">
-                <label for="q8a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q8a4" class="form-check-input" type="radio" name="q8"  value="4">
-                <label for="q8a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q8a5" class="form-check-input" type="radio" name="q8"  value="5">
-                <label for="q8a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q2a3" class="form-check-input" type="radio" name="q2"  value="3" onchange="$(checkSign2).show()">
+            <label for="q2a3" class="form-check-label">Нечто среднее</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card9">
-        <div class="card-header">Вопрос 9</div>
-        <div class="card-body">
-            <h5 class="card-title">Другим постоянно везет</h5>
-
-            <div class="form-check">
-                <input id="q9a1" class="form-check-input" type="radio" name="q9"  value="1">
-                <label for="q9a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q9a2" class="form-check-input" type="radio" name="q9"  value="2">
-                <label for="q9a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q9a3" class="form-check-input" type="radio" name="q9"  value="3">
-                <label for="q9a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q9a4" class="form-check-input" type="radio" name="q9"  value="4">
-                <label for="q9a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q9a5" class="form-check-input" type="radio" name="q9"  value="5">
-                <label for="q9a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q2a4" class="form-check-input" type="radio" name="q2"  value="4" onchange="$(checkSign2).show()">
+            <label for="q2a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card10">
-        <div class="card-header">Вопрос 10</div>
-        <div class="card-body">
-            <h5 class="card-title">Я дерусь чаще, чем окружающие</h5>
-
-            <div class="form-check">
-                <input id="q10a1" class="form-check-input" type="radio" name="q10"  value="1">
-                <label for="q10a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q10a2" class="form-check-input" type="radio" name="q10"  value="2">
-                <label for="q10a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q10a3" class="form-check-input" type="radio" name="q10"  value="3">
-                <label for="q10a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q10a4" class="form-check-input" type="radio" name="q10"  value="4">
-                <label for="q10a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q10a5" class="form-check-input" type="radio" name="q10"  value="5">
-                <label for="q10a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q2a5" class="form-check-input" type="radio" name="q2"  value="5" onchange="$(checkSign2).show()">
+            <label for="q2a5" class="form-check-label">Очень на меня похоже</label>
         </div>
+
     </div>
+</div>
 
+<!--
+<div class="card mb-5 questionCard" id="card3">
+    <div class="card-header">Вопрос 3 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign3"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Бывает, что я просто схожу с ума от ревности</h5>
 
-    <div class="card mb-5" id="card11">
-        <div class="card-header">Вопрос 11</div>
-        <div class="card-body">
-            <h5 class="card-title">У меня спокойный характер</h5>
-
-            <div class="form-check">
-                <input id="q11a1" class="form-check-input" type="radio" name="q11"  value="1">
-                <label for="q11a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q11a2" class="form-check-input" type="radio" name="q11"  value="2">
-                <label for="q11a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q11a3" class="form-check-input" type="radio" name="q11"  value="3">
-                <label for="q11a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q11a4" class="form-check-input" type="radio" name="q11"  value="4">
-                <label for="q11a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q11a5" class="form-check-input" type="radio" name="q11"  value="5">
-                <label for="q11a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q3a1" class="form-check-input" type="radio" name="q3"  value="1" onchange="$(checkSign3).show()">
+            <label for="q3a1" class="form-check-label">Очень на меня не похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card12">
-        <div class="card-header">Вопрос 12</div>
-        <div class="card-body">
-            <h5 class="card-title">Я не понимаю, почему иной раз мне бывает так горько</h5>
-
-            <div class="form-check">
-                <input id="q12a1" class="form-check-input" type="radio" name="q12"  value="1">
-                <label for="q12a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q12a2" class="form-check-input" type="radio" name="q12"  value="2">
-                <label for="q12a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q12a3" class="form-check-input" type="radio" name="q12"  value="3">
-                <label for="q12a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q12a4" class="form-check-input" type="radio" name="q12"  value="4">
-                <label for="q12a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q12a5" class="form-check-input" type="radio" name="q12"  value="5">
-                <label for="q12a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q3a2" class="form-check-input" type="radio" name="q3"  value="2" onchange="$(checkSign3).show()">
+            <label for="q3a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card13">
-        <div class="card-header">Вопрос 13</div>
-        <div class="card-body">
-            <h5 class="card-title">Если для защиты моих прав мне надо применить физическую силу, я так и сделаю</h5>
-
-            <div class="form-check">
-                <input id="q13a1" class="form-check-input" type="radio" name="q13"  value="1">
-                <label for="q13a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q13a2" class="form-check-input" type="radio" name="q13"  value="2">
-                <label for="q13a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q13a3" class="form-check-input" type="radio" name="q13"  value="3">
-                <label for="q13a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q13a4" class="form-check-input" type="radio" name="q13"  value="4">
-                <label for="q13a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q13a5" class="form-check-input" type="radio" name="q13"  value="5">
-                <label for="q13a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q3a3" class="form-check-input" type="radio" name="q3"  value="3" onchange="$(checkSign3).show()">
+            <label for="q3a3" class="form-check-label">Нечто среднее</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card14">
-        <div class="card-header">Вопрос 14</div>
-        <div class="card-body">
-            <h5 class="card-title">Некоторые мои друзья считают, что я вспыльчив</h5>
-
-            <div class="form-check">
-                <input id="q14a1" class="form-check-input" type="radio" name="q14"  value="1">
-                <label for="q14a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q14a2" class="form-check-input" type="radio" name="q14"  value="2">
-                <label for="q14a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q14a3" class="form-check-input" type="radio" name="q14"  value="3">
-                <label for="q14a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q14a4" class="form-check-input" type="radio" name="q14"  value="4">
-                <label for="q14a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q14a5" class="form-check-input" type="radio" name="q14"  value="5">
-                <label for="q14a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q3a4" class="form-check-input" type="radio" name="q3"  value="4" onchange="$(checkSign3).show()">
+            <label for="q3a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card15">
-        <div class="card-header">Вопрос 15</div>
-        <div class="card-body">
-            <h5 class="card-title">Я знаю, что мои так называемые друзья сплетничают обо мне</h5>
-
-            <div class="form-check">
-                <input id="q15a1" class="form-check-input" type="radio" name="q15"  value="1">
-                <label for="q15a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q15a2" class="form-check-input" type="radio" name="q15"  value="2">
-                <label for="q15a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q15a3" class="form-check-input" type="radio" name="q15"  value="3">
-                <label for="q15a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q15a4" class="form-check-input" type="radio" name="q15"  value="4">
-                <label for="q15a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q15a5" class="form-check-input" type="radio" name="q15"  value="5">
-                <label for="q15a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q3a5" class="form-check-input" type="radio" name="q3"  value="5" onchange="$(checkSign3).show()">
+            <label for="q3a5" class="form-check-label">Очень на меня похоже</label>
         </div>
+
     </div>
+</div>
 
 
-    <div class="card mb-5" id="card16">
-        <div class="card-header">Вопрос 16</div>
-        <div class="card-body">
-            <h5 class="card-title">Некоторые люди своим обращением ко мне могут довести меня до драки</h5>
+<div class="card mb-5 questionCard" id="card4">
+    <div class="card-header">Вопрос 4 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign4"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Если меня спровоцировать, я могу ударить другого человека</h5>
 
-            <div class="form-check">
-                <input id="q16a1" class="form-check-input" type="radio" name="q16"  value="1">
-                <label for="q16a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q16a2" class="form-check-input" type="radio" name="q16"  value="2">
-                <label for="q16a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q16a3" class="form-check-input" type="radio" name="q16"  value="3">
-                <label for="q16a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q16a4" class="form-check-input" type="radio" name="q16"  value="4">
-                <label for="q16a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q16a5" class="form-check-input" type="radio" name="q16"  value="5">
-                <label for="q16a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q4a1" class="form-check-input" type="radio" name="q4"  value="1" onchange="$(checkSign4).show()">
+            <label for="q4a1" class="form-check-label">Очень на меня не похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card17">
-        <div class="card-header">Вопрос 17</div>
-        <div class="card-body">
-            <h5 class="card-title">Иногда я выхожу из себя без особой причины</h5>
-
-            <div class="form-check">
-                <input id="q17a1" class="form-check-input" type="radio" name="q17"  value="1">
-                <label for="q17a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q17a2" class="form-check-input" type="radio" name="q17"  value="2">
-                <label for="q17a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q17a3" class="form-check-input" type="radio" name="q17"  value="3">
-                <label for="q17a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q17a4" class="form-check-input" type="radio" name="q17"  value="4">
-                <label for="q17a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q17a5" class="form-check-input" type="radio" name="q17"  value="5">
-                <label for="q17a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q4a2" class="form-check-input" type="radio" name="q4"  value="2" onchange="$(checkSign4).show()">
+            <label for="q4a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card18">
-        <div class="card-header">Вопрос 18</div>
-        <div class="card-body">
-            <h5 class="card-title">Я не доверяю слишком доброжелательным людям</h5>
-
-            <div class="form-check">
-                <input id="q18a1" class="form-check-input" type="radio" name="q18"  value="1">
-                <label for="q18a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q18a2" class="form-check-input" type="radio" name="q18"  value="2">
-                <label for="q18a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q18a3" class="form-check-input" type="radio" name="q18"  value="3">
-                <label for="q18a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q18a4" class="form-check-input" type="radio" name="q18"  value="4">
-                <label for="q18a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q18a5" class="form-check-input" type="radio" name="q18"  value="5">
-                <label for="q18a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q4a3" class="form-check-input" type="radio" name="q4"  value="3" onchange="$(checkSign4).show()">
+            <label for="q4a3" class="form-check-label">Нечто среднее</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card19">
-        <div class="card-header">Вопрос 19</div>
-        <div class="card-body">
-            <h5 class="card-title">Я не могу представить себе причину, достаточную, чтобы ударить другого человека</h5>
-
-            <div class="form-check">
-                <input id="q19a1" class="form-check-input" type="radio" name="q19"  value="1">
-                <label for="q19a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q19a2" class="form-check-input" type="radio" name="q19"  value="2">
-                <label for="q19a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q19a3" class="form-check-input" type="radio" name="q19"  value="3">
-                <label for="q19a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q19a4" class="form-check-input" type="radio" name="q19"  value="4">
-                <label for="q19a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q19a5" class="form-check-input" type="radio" name="q19"  value="5">
-                <label for="q19a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q4a4" class="form-check-input" type="radio" name="q4"  value="4" onchange="$(checkSign4).show()">
+            <label for="q4a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card20">
-        <div class="card-header">Вопрос 20</div>
-        <div class="card-body">
-            <h5 class="card-title">Мне трудно сдерживать раздражение</h5>
-
-            <div class="form-check">
-                <input id="q20a1" class="form-check-input" type="radio" name="q20"  value="1">
-                <label for="q20a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q20a2" class="form-check-input" type="radio" name="q20"  value="2">
-                <label for="q20a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q20a3" class="form-check-input" type="radio" name="q20"  value="3">
-                <label for="q20a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q20a4" class="form-check-input" type="radio" name="q20"  value="4">
-                <label for="q20a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q20a5" class="form-check-input" type="radio" name="q20"  value="5">
-                <label for="q20a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q4a5" class="form-check-input" type="radio" name="q4"  value="5" onchange="$(checkSign4).show()">
+            <label for="q4a5" class="form-check-label">Очень на меня похоже</label>
         </div>
+
     </div>
+</div>
 
 
-    <div class="card mb-5" id="card21">
-        <div class="card-header">Вопрос 21</div>
-        <div class="card-body">
-            <h5 class="card-title">Иногда мне кажется, что люди насмехаются надо мной за глаза</h5>
+<div class="card mb-5 questionCard" id="card5">
+    <div class="card-header">Вопрос 5 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign5"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Я раздражаюсь, когда у меня что-то не получается</h5>
 
-            <div class="form-check">
-                <input id="q21a1" class="form-check-input" type="radio" name="q21"  value="1">
-                <label for="q21a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q21a2" class="form-check-input" type="radio" name="q21"  value="2">
-                <label for="q21a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q21a3" class="form-check-input" type="radio" name="q21"  value="3">
-                <label for="q21a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q21a4" class="form-check-input" type="radio" name="q21"  value="4">
-                <label for="q21a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q21a5" class="form-check-input" type="radio" name="q21"  value="5">
-                <label for="q21a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q5a1" class="form-check-input" type="radio" name="q5"  value="1" onchange="$(checkSign5).show()">
+            <label for="q5a1" class="form-check-label">Очень на меня не похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card22">
-        <div class="card-header">Вопрос 22</div>
-        <div class="card-body">
-            <h5 class="card-title">Бывало, что я угрожал своим знакомым</h5>
-
-            <div class="form-check">
-                <input id="q22a1" class="form-check-input" type="radio" name="q22"  value="1">
-                <label for="q22a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q22a2" class="form-check-input" type="radio" name="q22"  value="2">
-                <label for="q22a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q22a3" class="form-check-input" type="radio" name="q22"  value="3">
-                <label for="q22a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q22a4" class="form-check-input" type="radio" name="q22"  value="4">
-                <label for="q22a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q22a5" class="form-check-input" type="radio" name="q22"  value="5">
-                <label for="q22a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q5a2" class="form-check-input" type="radio" name="q5"  value="2" onchange="$(checkSign5).show()">
+            <label for="q5a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card23">
-        <div class="card-header">Вопрос 23</div>
-        <div class="card-body">
-            <h5 class="card-title">Если человек слишком мил со мной, значит он от меня что-то хочет</h5>
-
-            <div class="form-check">
-                <input id="q23a1" class="form-check-input" type="radio" name="q23"  value="1">
-                <label for="q23a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q23a2" class="form-check-input" type="radio" name="q23"  value="2">
-                <label for="q23a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q23a3" class="form-check-input" type="radio" name="q23"  value="3">
-                <label for="q23a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q23a4" class="form-check-input" type="radio" name="q23"  value="4">
-                <label for="q23a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q23a5" class="form-check-input" type="radio" name="q23"  value="5">
-                <label for="q23a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q5a3" class="form-check-input" type="radio" name="q5"  value="3" onchange="$(checkSign5).show()">
+            <label for="q5a3" class="form-check-label">Нечто среднее</label>
         </div>
-    </div>
-
-
-    <div class="card mb-5" id="card24">
-        <div class="card-header">Вопрос 24</div>
-        <div class="card-body">
-            <h5 class="card-title">Иногда я настолько выходил из себя, что ломал вещи</h5>
-
-            <div class="form-check">
-                <input id="q24a1" class="form-check-input" type="radio" name="q24"  value="1">
-                <label for="q24a1" class="form-check-label">Очень на меня не похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q24a2" class="form-check-input" type="radio" name="q24"  value="2">
-                <label for="q24a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
-            </div>
-            <div class="form-check">
-                <input id="q24a3" class="form-check-input" type="radio" name="q24"  value="3">
-                <label for="q24a3" class="form-check-label">Нечто среднее</label>
-            </div>
-            <div class="form-check">
-                <input id="q24a4" class="form-check-input" type="radio" name="q24"  value="4">
-                <label for="q24a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
-            </div>
-            <div class="form-check">
-                <input id="q24a5" class="form-check-input" type="radio" name="q24"  value="5">
-                <label for="q24a5" class="form-check-label">Очень на меня похоже</label>
-            </div>
-
-
+        <div class="form-check">
+            <input id="q5a4" class="form-check-input" type="radio" name="q5"  value="4" onchange="$(checkSign5).show()">
+            <label for="q5a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
         </div>
-    </div>
+        <div class="form-check">
+            <input id="q5a5" class="form-check-input" type="radio" name="q5"  value="5" onchange="$(checkSign5).show()">
+            <label for="q5a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
 
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card6">
+    <div class="card-header">Вопрос 6 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign6"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Временами мне кажется, что жизнь мне что-то не додала</h5>
+
+        <div class="form-check">
+            <input id="q6a1" class="form-check-input" type="radio" name="q6"  value="1" onchange="$(checkSign6).show()">
+            <label for="q6a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q6a2" class="form-check-input" type="radio" name="q6"  value="2" onchange="$(checkSign6).show()">
+            <label for="q6a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q6a3" class="form-check-input" type="radio" name="q6"  value="3" onchange="$(checkSign6).show()">
+            <label for="q6a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q6a4" class="form-check-input" type="radio" name="q6"  value="4" onchange="$(checkSign6).show()">
+            <label for="q6a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q6a5" class="form-check-input" type="radio" name="q6"  value="5" onchange="$(checkSign6).show()">
+            <label for="q6a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card7">
+    <div class="card-header">Вопрос 7 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign7"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Если кто-то ударит меня, я дам сдачи</h5>
+
+        <div class="form-check">
+            <input id="q7a1" class="form-check-input" type="radio" name="q7"  value="1" onchange="$(checkSign7).show()">
+            <label for="q7a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q7a2" class="form-check-input" type="radio" name="q7"  value="2" onchange="$(checkSign7).show()">
+            <label for="q7a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q7a3" class="form-check-input" type="radio" name="q7"  value="3" onchange="$(checkSign7).show()">
+            <label for="q7a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q7a4" class="form-check-input" type="radio" name="q7"  value="4" onchange="$(checkSign7).show()">
+            <label for="q7a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q7a5" class="form-check-input" type="radio" name="q7"  value="5" onchange="$(checkSign7).show()">
+            <label for="q7a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card8">
+    <div class="card-header">Вопрос 8 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign8"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Иногда я чувствую, что вот-вот взорвусь</h5>
+
+        <div class="form-check">
+            <input id="q8a1" class="form-check-input" type="radio" name="q8"  value="1" onchange="$(checkSign8).show()">
+            <label for="q8a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q8a2" class="form-check-input" type="radio" name="q8"  value="2" onchange="$(checkSign8).show()">
+            <label for="q8a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q8a3" class="form-check-input" type="radio" name="q8"  value="3" onchange="$(checkSign8).show()">
+            <label for="q8a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q8a4" class="form-check-input" type="radio" name="q8"  value="4" onchange="$(checkSign8).show()">
+            <label for="q8a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q8a5" class="form-check-input" type="radio" name="q8"  value="5" onchange="$(checkSign8).show()">
+            <label for="q8a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card9">
+    <div class="card-header">Вопрос 9 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign9"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Другим постоянно везет</h5>
+
+        <div class="form-check">
+            <input id="q9a1" class="form-check-input" type="radio" name="q9"  value="1" onchange="$(checkSign9).show()">
+            <label for="q9a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q9a2" class="form-check-input" type="radio" name="q9"  value="2" onchange="$(checkSign9).show()">
+            <label for="q9a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q9a3" class="form-check-input" type="radio" name="q9"  value="3" onchange="$(checkSign9).show()">
+            <label for="q9a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q9a4" class="form-check-input" type="radio" name="q9"  value="4" onchange="$(checkSign9).show()">
+            <label for="q9a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q9a5" class="form-check-input" type="radio" name="q9"  value="5" onchange="$(checkSign9).show()">
+            <label for="q9a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card10">
+    <div class="card-header">Вопрос 10 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign10"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Я дерусь чаще, чем окружающие</h5>
+
+        <div class="form-check">
+            <input id="q10a1" class="form-check-input" type="radio" name="q10"  value="1" onchange="$(checkSign10).show()">
+            <label for="q10a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q10a2" class="form-check-input" type="radio" name="q10"  value="2" onchange="$(checkSign10).show()">
+            <label for="q10a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q10a3" class="form-check-input" type="radio" name="q10"  value="3" onchange="$(checkSign10).show()">
+            <label for="q10a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q10a4" class="form-check-input" type="radio" name="q10"  value="4" onchange="$(checkSign10).show()">
+            <label for="q10a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q10a5" class="form-check-input" type="radio" name="q10"  value="5" onchange="$(checkSign10).show()">
+            <label for="q10a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card11">
+    <div class="card-header">Вопрос 11 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign11"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">У меня спокойный характер</h5>
+
+        <div class="form-check">
+            <input id="q11a1" class="form-check-input" type="radio" name="q11"  value="1" onchange="$(checkSign11).show()">
+            <label for="q11a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q11a2" class="form-check-input" type="radio" name="q11"  value="2" onchange="$(checkSign11).show()">
+            <label for="q11a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q11a3" class="form-check-input" type="radio" name="q11"  value="3" onchange="$(checkSign11).show()">
+            <label for="q11a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q11a4" class="form-check-input" type="radio" name="q11"  value="4" onchange="$(checkSign11).show()">
+            <label for="q11a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q11a5" class="form-check-input" type="radio" name="q11"  value="5" onchange="$(checkSign11).show()">
+            <label for="q11a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card12">
+    <div class="card-header">Вопрос 12 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign12"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Я не понимаю, почему иной раз мне бывает так горько</h5>
+
+        <div class="form-check">
+            <input id="q12a1" class="form-check-input" type="radio" name="q12"  value="1" onchange="$(checkSign12).show()">
+            <label for="q12a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q12a2" class="form-check-input" type="radio" name="q12"  value="2" onchange="$(checkSign12).show()">
+            <label for="q12a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q12a3" class="form-check-input" type="radio" name="q12"  value="3" onchange="$(checkSign12).show()">
+            <label for="q12a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q12a4" class="form-check-input" type="radio" name="q12"  value="4" onchange="$(checkSign12).show()">
+            <label for="q12a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q12a5" class="form-check-input" type="radio" name="q12"  value="5" onchange="$(checkSign12).show()">
+            <label for="q12a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card13">
+    <div class="card-header">Вопрос 13 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign13"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Если для защиты моих прав мне надо применить физическую силу, я так и сделаю</h5>
+
+        <div class="form-check">
+            <input id="q13a1" class="form-check-input" type="radio" name="q13"  value="1" onchange="$(checkSign13).show()">
+            <label for="q13a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q13a2" class="form-check-input" type="radio" name="q13"  value="2" onchange="$(checkSign13).show()">
+            <label for="q13a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q13a3" class="form-check-input" type="radio" name="q13"  value="3" onchange="$(checkSign13).show()">
+            <label for="q13a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q13a4" class="form-check-input" type="radio" name="q13"  value="4" onchange="$(checkSign13).show()">
+            <label for="q13a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q13a5" class="form-check-input" type="radio" name="q13"  value="5" onchange="$(checkSign13).show()">
+            <label for="q13a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card14">
+    <div class="card-header">Вопрос 14 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign14"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Некоторые мои друзья считают, что я вспыльчив</h5>
+
+        <div class="form-check">
+            <input id="q14a1" class="form-check-input" type="radio" name="q14"  value="1" onchange="$(checkSign14).show()">
+            <label for="q14a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q14a2" class="form-check-input" type="radio" name="q14"  value="2" onchange="$(checkSign14).show()">
+            <label for="q14a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q14a3" class="form-check-input" type="radio" name="q14"  value="3" onchange="$(checkSign14).show()">
+            <label for="q14a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q14a4" class="form-check-input" type="radio" name="q14"  value="4" onchange="$(checkSign14).show()">
+            <label for="q14a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q14a5" class="form-check-input" type="radio" name="q14"  value="5" onchange="$(checkSign14).show()">
+            <label for="q14a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card15">
+    <div class="card-header">Вопрос 15 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign15"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Я знаю, что мои так называемые друзья сплетничают обо мне</h5>
+
+        <div class="form-check">
+            <input id="q15a1" class="form-check-input" type="radio" name="q15"  value="1" onchange="$(checkSign15).show()">
+            <label for="q15a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q15a2" class="form-check-input" type="radio" name="q15"  value="2" onchange="$(checkSign15).show()">
+            <label for="q15a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q15a3" class="form-check-input" type="radio" name="q15"  value="3" onchange="$(checkSign15).show()">
+            <label for="q15a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q15a4" class="form-check-input" type="radio" name="q15"  value="4" onchange="$(checkSign15).show()">
+            <label for="q15a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q15a5" class="form-check-input" type="radio" name="q15"  value="5" onchange="$(checkSign15).show()">
+            <label for="q15a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card16">
+    <div class="card-header">Вопрос 16 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign16"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Некоторые люди своим обращением ко мне могут довести меня до драки</h5>
+
+        <div class="form-check">
+            <input id="q16a1" class="form-check-input" type="radio" name="q16"  value="1" onchange="$(checkSign16).show()">
+            <label for="q16a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q16a2" class="form-check-input" type="radio" name="q16"  value="2" onchange="$(checkSign16).show()">
+            <label for="q16a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q16a3" class="form-check-input" type="radio" name="q16"  value="3" onchange="$(checkSign16).show()">
+            <label for="q16a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q16a4" class="form-check-input" type="radio" name="q16"  value="4" onchange="$(checkSign16).show()">
+            <label for="q16a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q16a5" class="form-check-input" type="radio" name="q16"  value="5" onchange="$(checkSign16).show()">
+            <label for="q16a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card17">
+    <div class="card-header">Вопрос 17 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign17"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Иногда я выхожу из себя без особой причины</h5>
+
+        <div class="form-check">
+            <input id="q17a1" class="form-check-input" type="radio" name="q17"  value="1" onchange="$(checkSign17).show()">
+            <label for="q17a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q17a2" class="form-check-input" type="radio" name="q17"  value="2" onchange="$(checkSign17).show()">
+            <label for="q17a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q17a3" class="form-check-input" type="radio" name="q17"  value="3" onchange="$(checkSign17).show()">
+            <label for="q17a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q17a4" class="form-check-input" type="radio" name="q17"  value="4" onchange="$(checkSign17).show()">
+            <label for="q17a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q17a5" class="form-check-input" type="radio" name="q17"  value="5" onchange="$(checkSign17).show()">
+            <label for="q17a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card18">
+    <div class="card-header">Вопрос 18 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign18"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Я не доверяю слишком доброжелательным людям</h5>
+
+        <div class="form-check">
+            <input id="q18a1" class="form-check-input" type="radio" name="q18"  value="1" onchange="$(checkSign18).show()">
+            <label for="q18a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q18a2" class="form-check-input" type="radio" name="q18"  value="2" onchange="$(checkSign18).show()">
+            <label for="q18a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q18a3" class="form-check-input" type="radio" name="q18"  value="3" onchange="$(checkSign18).show()">
+            <label for="q18a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q18a4" class="form-check-input" type="radio" name="q18"  value="4" onchange="$(checkSign18).show()">
+            <label for="q18a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q18a5" class="form-check-input" type="radio" name="q18"  value="5" onchange="$(checkSign18).show()">
+            <label for="q18a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card19">
+    <div class="card-header">Вопрос 19 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign19"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Я не могу представить себе причину, достаточную, чтобы ударить другого человека</h5>
+
+        <div class="form-check">
+            <input id="q19a1" class="form-check-input" type="radio" name="q19"  value="1" onchange="$(checkSign19).show()">
+            <label for="q19a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q19a2" class="form-check-input" type="radio" name="q19"  value="2" onchange="$(checkSign19).show()">
+            <label for="q19a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q19a3" class="form-check-input" type="radio" name="q19"  value="3" onchange="$(checkSign19).show()">
+            <label for="q19a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q19a4" class="form-check-input" type="radio" name="q19"  value="4" onchange="$(checkSign19).show()">
+            <label for="q19a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q19a5" class="form-check-input" type="radio" name="q19"  value="5" onchange="$(checkSign19).show()">
+            <label for="q19a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card20">
+    <div class="card-header">Вопрос 20 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign20"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Мне трудно сдерживать раздражение</h5>
+
+        <div class="form-check">
+            <input id="q20a1" class="form-check-input" type="radio" name="q20"  value="1" onchange="$(checkSign20).show()">
+            <label for="q20a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q20a2" class="form-check-input" type="radio" name="q20"  value="2" onchange="$(checkSign20).show()">
+            <label for="q20a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q20a3" class="form-check-input" type="radio" name="q20"  value="3" onchange="$(checkSign20).show()">
+            <label for="q20a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q20a4" class="form-check-input" type="radio" name="q20"  value="4" onchange="$(checkSign20).show()">
+            <label for="q20a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q20a5" class="form-check-input" type="radio" name="q20"  value="5" onchange="$(checkSign20).show()">
+            <label for="q20a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card21">
+    <div class="card-header">Вопрос 21 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign21"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Иногда мне кажется, что люди насмехаются надо мной за глаза</h5>
+
+        <div class="form-check">
+            <input id="q21a1" class="form-check-input" type="radio" name="q21"  value="1" onchange="$(checkSign21).show()">
+            <label for="q21a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q21a2" class="form-check-input" type="radio" name="q21"  value="2" onchange="$(checkSign21).show()">
+            <label for="q21a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q21a3" class="form-check-input" type="radio" name="q21"  value="3" onchange="$(checkSign21).show()">
+            <label for="q21a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q21a4" class="form-check-input" type="radio" name="q21"  value="4" onchange="$(checkSign21).show()">
+            <label for="q21a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q21a5" class="form-check-input" type="radio" name="q21"  value="5" onchange="$(checkSign21).show()">
+            <label for="q21a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card22">
+    <div class="card-header">Вопрос 22 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign22"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Бывало, что я угрожал своим знакомым</h5>
+
+        <div class="form-check">
+            <input id="q22a1" class="form-check-input" type="radio" name="q22"  value="1" onchange="$(checkSign22).show()">
+            <label for="q22a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q22a2" class="form-check-input" type="radio" name="q22"  value="2" onchange="$(checkSign22).show()">
+            <label for="q22a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q22a3" class="form-check-input" type="radio" name="q22"  value="3" onchange="$(checkSign22).show()">
+            <label for="q22a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q22a4" class="form-check-input" type="radio" name="q22"  value="4" onchange="$(checkSign22).show()">
+            <label for="q22a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q22a5" class="form-check-input" type="radio" name="q22"  value="5" onchange="$(checkSign22).show()">
+            <label for="q22a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card23">
+    <div class="card-header">Вопрос 23 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign23"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Если человек слишком мил со мной, значит он от меня что-то хочет</h5>
+
+        <div class="form-check">
+            <input id="q23a1" class="form-check-input" type="radio" name="q23"  value="1" onchange="$(checkSign23).show()">
+            <label for="q23a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q23a2" class="form-check-input" type="radio" name="q23"  value="2" onchange="$(checkSign23).show()">
+            <label for="q23a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q23a3" class="form-check-input" type="radio" name="q23"  value="3" onchange="$(checkSign23).show()">
+            <label for="q23a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q23a4" class="form-check-input" type="radio" name="q23"  value="4" onchange="$(checkSign23).show()">
+            <label for="q23a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q23a5" class="form-check-input" type="radio" name="q23"  value="5" onchange="$(checkSign23).show()">
+            <label for="q23a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card mb-5 questionCard" id="card24">
+    <div class="card-header">Вопрос 24 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign24"></i></div>
+    <div class="card-body questionBody">
+        <h5 class="card-title">Иногда я настолько выходил из себя, что ломал вещи</h5>
+
+        <div class="form-check">
+            <input id="q24a1" class="form-check-input" type="radio" name="q24"  value="1" onchange="$(checkSign24).show()">
+            <label for="q24a1" class="form-check-label">Очень на меня не похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q24a2" class="form-check-input" type="radio" name="q24"  value="2" onchange="$(checkSign24).show()">
+            <label for="q24a2" class="form-check-label">Скорее не похоже на меня, чем похоже</label>
+        </div>
+        <div class="form-check">
+            <input id="q24a3" class="form-check-input" type="radio" name="q24"  value="3" onchange="$(checkSign24).show()">
+            <label for="q24a3" class="form-check-label">Нечто среднее</label>
+        </div>
+        <div class="form-check">
+            <input id="q24a4" class="form-check-input" type="radio" name="q24"  value="4" onchange="$(checkSign24).show()">
+            <label for="q24a4" class="form-check-label">Скорее похоже на меня, чем нет</label>
+        </div>
+        <div class="form-check">
+            <input id="q24a5" class="form-check-input" type="radio" name="q24"  value="5" onchange="$(checkSign24).show()">
+            <label for="q24a5" class="form-check-label">Очень на меня похоже</label>
+        </div>
+
+    </div>
+</div>
+
+-->
+
+
+<button class="btn btn-primary" onclick="sendData()">Сохранить ответы</button>
+    <br><br>
 
 
 
