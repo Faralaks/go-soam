@@ -38,6 +38,7 @@ var Config = configType{}
 var Client *mongo.Client
 var TokensCol *mongo.Collection
 var UsersCol *mongo.Collection
+var ResultsCol *mongo.Collection
 
 var FeedBack chan interface{}
 var feedCounter = 0

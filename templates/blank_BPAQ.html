@@ -1,5 +1,4 @@
 {{define "scripts"}}
-<script src="/js/universal.js" type="text/javascript"></script>
 <script>
     function sendData() {
         let elems = $(".questionBody");
@@ -14,6 +13,8 @@
 
         $.post("/save_answers", {answers: $("#blank").serialize()}).done(function (response) {
             console.log(response)
+            document.location.replace("/logout");
+
         }).fail(function () {alert("Превышено время ожидания или произошла ошибка на стороне сервера! Операция не выполнена!");
         })
 
@@ -90,7 +91,6 @@
         </div>
     </div>
 
-    <!--
     <div class="card mb-5 questionCard" id="card3">
         <div class="card-header">Вопрос 3 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign3"></i></div>
         <div class="card-body questionBody">

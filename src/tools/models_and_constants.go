@@ -70,7 +70,7 @@ type FullUser struct {
 	CreatedDate  Timestamp  `json:"create_date" bson:"createdDate"`
 	ModifiedDate Timestamp  `json:"modifiedDate,omitempty" bson:"modifiedDate,omitempty"`
 	Step         string     `json:"step,omitempty" bson:"step"`
-	Result       int8       `json:"result,omitempty" bson:"result"`
+	Result       interface{}       `json:"result,omitempty" bson:"result"`
 	Name         string     `json:"name,omitempty" bson:"name"`
 	BirthYear    uint16     `json:"birthYear,omitempty" bson:"birthYear"`
 	Ege          uint8      `json:"ege,omitempty" bson:"ege"`

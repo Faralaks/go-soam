@@ -19,12 +19,6 @@ var Save_answers = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request)
 	}
 
 	ansList := strings.Split(r.FormValue("answers"), "&")
-	ans := make(map[string]string)
-	for i := 0; i < len(ansList); i++ {
-		tmp := strings.Split(ansList[i], "=")
-		ans[tmp[0]] = tmp[1]
-	}
-	VPrint(ans)
 
 	var user FullUser
 	ctx, _ := context.WithTimeout(context.Background(), 2*time.Second)
@@ -36,7 +30,7 @@ var Save_answers = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request)
 
 	step := user.Step
 
-	err = BlankHandlers[step](ans)
+	err = BlankHandlers[step](ansList, curUserUid)
 	if err != nil {
 		JsonMsg{Kind: FatalKind, Msg: "Не удалось посчитать и сохранить результаты | " + err.Error()}.Send(w)
 		return
