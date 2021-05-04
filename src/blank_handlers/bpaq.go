@@ -14,7 +14,7 @@ func BPAQ_hendler(ansList []string, uid p.ObjectID) error {
 		return err
 	}
 
-	result := map[string]int{"aggression":0, "anger":0, "hostility":0}
+	result := map[string]int{"aggression": 0, "anger": 0, "hostility": 0}
 
 	aggressionList := [9]string{"1", "4", "7", "10", "13", "16", "22", "24"}
 	angerList := [7]string{"2", "5", "8", "14", "17", "20"}
@@ -25,7 +25,6 @@ func BPAQ_hendler(ansList []string, uid p.ObjectID) error {
 		result["aggression"] += ans["q"+n]
 	}
 	result["aggression"] += (6 - ans["q19"])
-
 
 	// Счетаем шкалу Гнева
 	for _, n := range angerList {
@@ -38,16 +37,14 @@ func BPAQ_hendler(ansList []string, uid p.ObjectID) error {
 		result["hostility"] += ans["q"+n]
 	}
 
-
-
 	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
-	_, err = UsersCol.UpdateOne(ctx, bson.M{"_id": uid}, bson.D{{"$set", bson.M{"result.BPAQ":result}}})
+	_, err = UsersCol.UpdateOne(ctx, bson.M{"_id": uid}, bson.D{{"$set", bson.M{"result.BPAQ": result}}, {"$inc", bson.M{"step": 1}}})
 	if err != nil {
 		return err
 	}
 
 	ctx, _ = context.WithTimeout(context.Background(), 3*time.Second)
-	_, err = ResultsCol.InsertOne(ctx, bson.M{"pastedBy": uid, "date":CurUtcStamp(), "answers":ans})
+	_, err = ResultsCol.InsertOne(ctx, bson.M{"pastedBy": uid, "date": CurUtcStamp(), "answers": ans})
 	if err != nil {
 		return err
 	}

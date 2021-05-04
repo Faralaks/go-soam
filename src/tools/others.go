@@ -30,6 +30,7 @@ type configType struct {
 	ResultsColName string
 	StatsColName   string
 	TestList       []string
+	TestCount      uint8
 }
 
 var configData map[string]string

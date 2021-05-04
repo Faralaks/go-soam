@@ -63,10 +63,17 @@ var TesteePage = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	step := user.Step
+	stepNum := user.Step
 
 	w.Header().Set("Content-Type", "text/html")
-	main := Config.CurPath + "/templates/blank_" + step + ".html"
+	var main string
+
+	if stepNum >= Config.TestCount {
+		main = Config.CurPath + "/templates/blank_FinishResponse.html"
+	} else {
+		main = Config.CurPath + "/templates/blank_" + Config.TestList[stepNum] + ".html"
+	}
+
 	base := Config.CurPath + "/templates/base.html"
 
 	tmpl, err := template.ParseFiles(main, base)

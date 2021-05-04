@@ -38,7 +38,7 @@ func main() {
 	r.HandleFunc("/remake", remakeDb).Methods("GET")
 	r.HandleFunc("/logout", logOut).Methods("GET")
 
-	OpenInBrowser("http://127.0.0.1:" + Config.Port)
+	//OpenInBrowser("http://127.0.0.1:" + Config.Port)
 	_ = http.ListenAndServe(Config.Address+":"+Config.Port, handlers.LoggingHandler(os.Stdout, r))
 }
 

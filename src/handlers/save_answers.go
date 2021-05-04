@@ -28,7 +28,7 @@ var Save_answers = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	step := user.Step
+	step := Config.TestList[user.Step]
 
 	err = BlankHandlers[step](ansList, curUserUid)
 	if err != nil {
