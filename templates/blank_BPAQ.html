@@ -21,6 +21,13 @@
 
     }
 
+    function fakeAns() {
+        let elems = $(".questionBody");
+        for (let i = 1; i <= elems.length; i++) {
+            $("#q"+i.toString()+"a1").attr("checked", "true")
+        }
+
+    }
 
     $(".card-body").ready(function () { $("input:radio").change(function () { $(this).parent().parent().parent().children().first().css('background', 'white') }) });
 </script>
@@ -30,6 +37,13 @@
 {{define "blank"}}
     {{template "head"}}
     <h1 style="margin: auto">Тестовый бланк №1</h1><br>
+
+
+<button class="btn btn-danger" onclick="fakeAns()">Автоответ</button>
+<button class="btn btn-primary" onclick="sendData()">Сохранить ответы</button>
+
+<br><br>
+
     <form id="blank">
 
     <div class="card mb-5 questionCard" id="card1">

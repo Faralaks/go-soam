@@ -15,6 +15,7 @@ var Itoa = strconv.Itoa
 func init() {
 
 		BlankHandlers["BPAQ"] = BPAQ_hendler
+		BlankHandlers["ITO"] = ITO_hendler
 }
 
 func intValMap(ansList []string) (map[string]int, error) {

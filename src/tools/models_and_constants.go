@@ -71,7 +71,7 @@ type FullUser struct {
 	ModifiedDate Timestamp   `json:"modifiedDate,omitempty" bson:"modifiedDate,omitempty"`
 	Step         uint8       `json:"step,omitempty" bson:"step"`
 	Tests        []string    `json:"tests,omitempty" bson:"tests"`
-	Result       interface{} `json:"result,omitempty" bson:"result,omitempty"`
+	Result       map[string]interface{} `json:"result,omitempty" bson:"result,omitempty"`
 	Name         string      `json:"name,omitempty" bson:"name"`
 	BirthYear    uint16      `json:"birthYear,omitempty" bson:"birthYear"`
 	Ege          uint8       `json:"ege,omitempty" bson:"ege"`

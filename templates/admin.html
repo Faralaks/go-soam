@@ -1,13 +1,14 @@
 {{define "scripts"}}
     <script src="/js/universal.js" type="text/javascript"></script>
+<script src="/js/visualizer.js" type="text/javascript"></script>
     <script src="/js/admin.js" type="text/javascript"></script>
 {{end}}
 {{define "styles"}}
     <style>
-        .redCheck:checked~.redCheck::before{
-            color: white;
-            background-color: #dc3545;
-            border-color: #dc3545;
+
+        .greyRow:hover {
+            background-color: rgb(230,230,230);
+            cursor: pointer;
         }
     </style>
 {{end}}

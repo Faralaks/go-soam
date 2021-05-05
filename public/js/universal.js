@@ -80,8 +80,7 @@ function generatePas(len){
 
 function stamp2str(timestamp){
   let date = new Date(timestamp * 1000);
-  return date.toLocaleString().replace(", ", "<br>");
-  l
+  return date.toLocaleString().replace(", ", " ");
 }
 
 function b64enc(text) {
@@ -181,3 +180,4 @@ function validateNum(elem){
     return false;
 
 }
+

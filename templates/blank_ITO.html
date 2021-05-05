@@ -1,0 +1,1702 @@
+{{define "scripts"}}
+<script>
+    function sendData() {
+        let elems = $(".questionBody");
+        for (let i = 0; i < elems.length; i++) {
+            let e = $(elems[i]);
+            if (e.find("input:radio:checked").length !== 1) {
+                e.parent().children().first().css("background", "lightgrey");
+                $('body,html').animate({scrollTop: e.parent().offset().top}, 400);
+                return
+            }
+        }
+
+        $.post("/save_answers", {answers: $("#blank").serialize()}).done(function (response) {
+            console.log(response)
+            document.location.replace("/testee");
+
+        }).fail(function () {alert("Превышено время ожидания или произошла ошибка на стороне сервера! Операция не выполнена!");
+        })
+
+
+    }
+
+    function fakeAns() {
+        let elems = $(".questionBody");
+        for (let i = 1; i <= elems.length; i++) {
+            $("#q"+i.toString()+"a1").attr("checked", "true")
+        }
+
+    }
+
+
+    $(".card-body").ready(function () { $("input:radio").change(function () { $(this).parent().parent().parent().children().first().css('background', 'white') }) });
+</script>
+{{end}}
+{{define "styles"}}
+{{end}}
+{{define "blank"}}
+    {{template "head"}}
+    <h1 style="margin: auto">Тестовый бланк №2</h1><br>
+
+
+    <button class="btn btn-danger" onclick="fakeAns()">Автоответ</button>
+<button class="btn btn-primary" onclick="sendData()">Сохранить ответы</button>
+
+    <br><br>
+
+    <form id="blank">
+
+
+
+        <div class="card mb-5 questionCard" id="card1">
+            <div class="card-header">Вопрос 1 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign1"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я постараюсь отнестись к исследованию ответственно, быть максимально искренним.</h5>
+
+                <div class="form-check">
+                    <input id="q1a1" class="form-check-input" type="radio" name="q1"  value="1" onchange="$(checkSign1).show()">
+                    <label for="q1a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q1a2" class="form-check-input" type="radio" name="q1"  value="2" onchange="$(checkSign1).show()">
+                    <label for="q1a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card2">
+            <div class="card-header">Вопрос 2 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign2"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">У меня очень сложный и трудный для окружающих характер.</h5>
+
+                <div class="form-check">
+                    <input id="q2a1" class="form-check-input" type="radio" name="q2"  value="1" onchange="$(checkSign2).show()">
+                    <label for="q2a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q2a2" class="form-check-input" type="radio" name="q2"  value="2" onchange="$(checkSign2).show()">
+                    <label for="q2a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+        <!---->
+        <div class="card mb-5 questionCard" id="card3">
+            <div class="card-header">Вопрос 3 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign3"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я лучше справляюсь с работой в тишине и одиночестве чем в присутствии многих людей или в шумном месте.</h5>
+
+                <div class="form-check">
+                    <input id="q3a1" class="form-check-input" type="radio" name="q3"  value="1" onchange="$(checkSign3).show()">
+                    <label for="q3a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q3a2" class="form-check-input" type="radio" name="q3"  value="2" onchange="$(checkSign3).show()">
+                    <label for="q3a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card4">
+            <div class="card-header">Вопрос 4 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign4"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Решая серьезные проблемы, я, как правило, обхожусь без посторонней помощи.</h5>
+
+                <div class="form-check">
+                    <input id="q4a1" class="form-check-input" type="radio" name="q4"  value="1" onchange="$(checkSign4).show()">
+                    <label for="q4a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q4a2" class="form-check-input" type="radio" name="q4"  value="2" onchange="$(checkSign4).show()">
+                    <label for="q4a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card5">
+            <div class="card-header">Вопрос 5 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign5"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я очень редко заговариваю первым (первой) с незнакомым! людьми.</h5>
+
+                <div class="form-check">
+                    <input id="q5a1" class="form-check-input" type="radio" name="q5"  value="1" onchange="$(checkSign5).show()">
+                    <label for="q5a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q5a2" class="form-check-input" type="radio" name="q5"  value="2" onchange="$(checkSign5).show()">
+                    <label for="q5a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card6">
+            <div class="card-header">Вопрос 6 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign6"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Для меня важно, что подумают другие о моих высказываниях и поступках.</h5>
+
+                <div class="form-check">
+                    <input id="q6a1" class="form-check-input" type="radio" name="q6"  value="1" onchange="$(checkSign6).show()">
+                    <label for="q6a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q6a2" class="form-check-input" type="radio" name="q6"  value="2" onchange="$(checkSign6).show()">
+                    <label for="q6a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card7">
+            <div class="card-header">Вопрос 7 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign7"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Если будет нужно, я разрушу все преграды на пути к достижению цели.</h5>
+
+                <div class="form-check">
+                    <input id="q7a1" class="form-check-input" type="radio" name="q7"  value="1" onchange="$(checkSign7).show()">
+                    <label for="q7a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q7a2" class="form-check-input" type="radio" name="q7"  value="2" onchange="$(checkSign7).show()">
+                    <label for="q7a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card8">
+            <div class="card-header">Вопрос 8 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign8"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я часто тревожусь по пустякам.</h5>
+
+                <div class="form-check">
+                    <input id="q8a1" class="form-check-input" type="radio" name="q8"  value="1" onchange="$(checkSign8).show()">
+                    <label for="q8a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q8a2" class="form-check-input" type="radio" name="q8"  value="2" onchange="$(checkSign8).show()">
+                    <label for="q8a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card9">
+            <div class="card-header">Вопрос 9 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign9"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">В моих неудачах виноваты определенные люди.</h5>
+
+                <div class="form-check">
+                    <input id="q9a1" class="form-check-input" type="radio" name="q9"  value="1" onchange="$(checkSign9).show()">
+                    <label for="q9a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q9a2" class="form-check-input" type="radio" name="q9"  value="2" onchange="$(checkSign9).show()">
+                    <label for="q9a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card10">
+            <div class="card-header">Вопрос 10 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign10"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Для меня важно иметь единое мнение с теми людьми, с которыми я обычно общаюсь.</h5>
+
+                <div class="form-check">
+                    <input id="q10a1" class="form-check-input" type="radio" name="q10"  value="1" onchange="$(checkSign10).show()">
+                    <label for="q10a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q10a2" class="form-check-input" type="radio" name="q10"  value="2" onchange="$(checkSign10).show()">
+                    <label for="q10a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card11">
+            <div class="card-header">Вопрос 11 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign11"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Меня мало касается все, что случается с другими. </h5>
+
+                <div class="form-check">
+                    <input id="q11a1" class="form-check-input" type="radio" name="q11"  value="1" onchange="$(checkSign11).show()">
+                    <label for="q11a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q11a2" class="form-check-input" type="radio" name="q11"  value="2" onchange="$(checkSign11).show()">
+                    <label for="q11a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card12">
+            <div class="card-header">Вопрос 12 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign12"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне интересны яркие, артистичные личности. </h5>
+
+                <div class="form-check">
+                    <input id="q12a1" class="form-check-input" type="radio" name="q12"  value="1" onchange="$(checkSign12).show()">
+                    <label for="q12a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q12a2" class="form-check-input" type="radio" name="q12"  value="2" onchange="$(checkSign12).show()">
+                    <label for="q12a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card13">
+            <div class="card-header">Вопрос 13 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign13"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне нет дела до чужих страданий: хватает своих.</h5>
+
+                <div class="form-check">
+                    <input id="q13a1" class="form-check-input" type="radio" name="q13"  value="1" onchange="$(checkSign13).show()">
+                    <label for="q13a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q13a2" class="form-check-input" type="radio" name="q13"  value="2" onchange="$(checkSign13).show()">
+                    <label for="q13a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card14">
+            <div class="card-header">Вопрос 14 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign14"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">В шумной компании я чаще всего — в роли только наблюдателя.</h5>
+
+                <div class="form-check">
+                    <input id="q14a1" class="form-check-input" type="radio" name="q14"  value="1" onchange="$(checkSign14).show()">
+                    <label for="q14a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q14a2" class="form-check-input" type="radio" name="q14"  value="2" onchange="$(checkSign14).show()">
+                    <label for="q14a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card15">
+            <div class="card-header">Вопрос 15 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign15"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Для меня невыносимо наблюдать страдания других людей. </h5>
+
+                <div class="form-check">
+                    <input id="q15a1" class="form-check-input" type="radio" name="q15"  value="1" onchange="$(checkSign15).show()">
+                    <label for="q15a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q15a2" class="form-check-input" type="radio" name="q15"  value="2" onchange="$(checkSign15).show()">
+                    <label for="q15a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card16">
+            <div class="card-header">Вопрос 16 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign16"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я — человек абсолютно правдивый и искренний.</h5>
+
+                <div class="form-check">
+                    <input id="q16a1" class="form-check-input" type="radio" name="q16"  value="1" onchange="$(checkSign16).show()">
+                    <label for="q16a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q16a2" class="form-check-input" type="radio" name="q16"  value="2" onchange="$(checkSign16).show()">
+                    <label for="q16a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card17">
+            <div class="card-header">Вопрос 17 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign17"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Все мои беды связаны с собственным неумением ладить с людьми.</h5>
+
+                <div class="form-check">
+                    <input id="q17a1" class="form-check-input" type="radio" name="q17"  value="1" onchange="$(checkSign17).show()">
+                    <label for="q17a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q17a2" class="form-check-input" type="radio" name="q17"  value="2" onchange="$(checkSign17).show()">
+                    <label for="q17a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card18">
+            <div class="card-header">Вопрос 18 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign18"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Меня часто тянет к шумным компаниям.</h5>
+
+                <div class="form-check">
+                    <input id="q18a1" class="form-check-input" type="radio" name="q18"  value="1" onchange="$(checkSign18).show()">
+                    <label for="q18a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q18a2" class="form-check-input" type="radio" name="q18"  value="2" onchange="$(checkSign18).show()">
+                    <label for="q18a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card19">
+            <div class="card-header">Вопрос 19 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign19"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Принимая важное решение, я всегда действую самостоятельно. </h5>
+
+                <div class="form-check">
+                    <input id="q19a1" class="form-check-input" type="radio" name="q19"  value="1" onchange="$(checkSign19).show()">
+                    <label for="q19a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q19a2" class="form-check-input" type="radio" name="q19"  value="2" onchange="$(checkSign19).show()">
+                    <label for="q19a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card20">
+            <div class="card-header">Вопрос 20 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign20"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне всегда приятно заводить новых знакомых.</h5>
+
+                <div class="form-check">
+                    <input id="q20a1" class="form-check-input" type="radio" name="q20"  value="1" onchange="$(checkSign20).show()">
+                    <label for="q20a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q20a2" class="form-check-input" type="radio" name="q20"  value="2" onchange="$(checkSign20).show()">
+                    <label for="q20a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card21">
+            <div class="card-header">Вопрос 21 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign21"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Берясь за какое-либо дело, я не стану долго раздумывать, прежде чем начать действовать.</h5>
+
+                <div class="form-check">
+                    <input id="q21a1" class="form-check-input" type="radio" name="q21"  value="1" onchange="$(checkSign21).show()">
+                    <label for="q21a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q21a2" class="form-check-input" type="radio" name="q21"  value="2" onchange="$(checkSign21).show()">
+                    <label for="q21a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card22">
+            <div class="card-header">Вопрос 22 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign22"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Меня раздражают люди, пытающиеся изменить мое мнение, когда я уверен (уверена) в своей правоте.</h5>
+
+                <div class="form-check">
+                    <input id="q22a1" class="form-check-input" type="radio" name="q22"  value="1" onchange="$(checkSign22).show()">
+                    <label for="q22a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q22a2" class="form-check-input" type="radio" name="q22"  value="2" onchange="$(checkSign22).show()">
+                    <label for="q22a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card23">
+            <div class="card-header">Вопрос 23 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign23"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я часто волнуюсь за близких мне людей даже без серьезного повода. </h5>
+
+                <div class="form-check">
+                    <input id="q23a1" class="form-check-input" type="radio" name="q23"  value="1" onchange="$(checkSign23).show()">
+                    <label for="q23a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q23a2" class="form-check-input" type="radio" name="q23"  value="2" onchange="$(checkSign23).show()">
+                    <label for="q23a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card24">
+            <div class="card-header">Вопрос 24 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign24"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я не терплю, когда кто-нибудь меняет заведенный мною порядок. </h5>
+
+                <div class="form-check">
+                    <input id="q24a1" class="form-check-input" type="radio" name="q24"  value="1" onchange="$(checkSign24).show()">
+                    <label for="q24a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q24a2" class="form-check-input" type="radio" name="q24"  value="2" onchange="$(checkSign24).show()">
+                    <label for="q24a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card25">
+            <div class="card-header">Вопрос 25 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign25"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я умею привлекать к себе внимание окружающих меня людей.</h5>
+
+                <div class="form-check">
+                    <input id="q25a1" class="form-check-input" type="radio" name="q25"  value="1" onchange="$(checkSign25).show()">
+                    <label for="q25a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q25a2" class="form-check-input" type="radio" name="q25"  value="2" onchange="$(checkSign25).show()">
+                    <label for="q25a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card26">
+            <div class="card-header">Вопрос 26 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign26"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">В жизни я твердо придерживаюсь определенных принципов. </h5>
+
+                <div class="form-check">
+                    <input id="q26a1" class="form-check-input" type="radio" name="q26"  value="1" onchange="$(checkSign26).show()">
+                    <label for="q26a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q26a2" class="form-check-input" type="radio" name="q26"  value="2" onchange="$(checkSign26).show()">
+                    <label for="q26a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card27">
+            <div class="card-header">Вопрос 27 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign27"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Люблю посещать компании, где можно танцевать или петь.</h5>
+
+                <div class="form-check">
+                    <input id="q27a1" class="form-check-input" type="radio" name="q27"  value="1" onchange="$(checkSign27).show()">
+                    <label for="q27a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q27a2" class="form-check-input" type="radio" name="q27"  value="2" onchange="$(checkSign27).show()">
+                    <label for="q27a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card28">
+            <div class="card-header">Вопрос 28 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign28"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я чрезвычайно чувствителен (чувствительна) к изменениям в настроении окружающих меня людей.</h5>
+
+                <div class="form-check">
+                    <input id="q28a1" class="form-check-input" type="radio" name="q28"  value="1" onchange="$(checkSign28).show()">
+                    <label for="q28a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q28a2" class="form-check-input" type="radio" name="q28"  value="2" onchange="$(checkSign28).show()">
+                    <label for="q28a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card29">
+            <div class="card-header">Вопрос 29 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign29"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я могу не смущаясь дурачиться в веселой компании.</h5>
+
+                <div class="form-check">
+                    <input id="q29a1" class="form-check-input" type="radio" name="q29"  value="1" onchange="$(checkSign29).show()">
+                    <label for="q29a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q29a2" class="form-check-input" type="radio" name="q29"  value="2" onchange="$(checkSign29).show()">
+                    <label for="q29a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card30">
+            <div class="card-header">Вопрос 30 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign30"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я спокойно отношусь к тому, что кто-то рядом переживает по поводу своих неприятностей.</h5>
+
+                <div class="form-check">
+                    <input id="q30a1" class="form-check-input" type="radio" name="q30"  value="1" onchange="$(checkSign30).show()">
+                    <label for="q30a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q30a2" class="form-check-input" type="radio" name="q30"  value="2" onchange="$(checkSign30).show()">
+                    <label for="q30a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card31">
+            <div class="card-header">Вопрос 31 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign31"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я никогда не поступаю как эгоист (эгоистка).</h5>
+
+                <div class="form-check">
+                    <input id="q31a1" class="form-check-input" type="radio" name="q31"  value="1" onchange="$(checkSign31).show()">
+                    <label for="q31a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q31a2" class="form-check-input" type="radio" name="q31"  value="2" onchange="$(checkSign31).show()">
+                    <label for="q31a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card32">
+            <div class="card-header">Вопрос 32 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign32"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Часто бывает так, что из-за меня у окружающих портится настроение.</h5>
+
+                <div class="form-check">
+                    <input id="q32a1" class="form-check-input" type="radio" name="q32"  value="1" onchange="$(checkSign32).show()">
+                    <label for="q32a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q32a2" class="form-check-input" type="radio" name="q32"  value="2" onchange="$(checkSign32).show()">
+                    <label for="q32a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card33">
+            <div class="card-header">Вопрос 33 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign33"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Интересные идеи приходят мне в голову чаще, когда я один (одна).</h5>
+
+                <div class="form-check">
+                    <input id="q33a1" class="form-check-input" type="radio" name="q33"  value="1" onchange="$(checkSign33).show()">
+                    <label for="q33a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q33a2" class="form-check-input" type="radio" name="q33"  value="2" onchange="$(checkSign33).show()">
+                    <label for="q33a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card34">
+            <div class="card-header">Вопрос 34 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign34"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я могу взять на себя ответственность за целую группу людей для пользы дела.</h5>
+
+                <div class="form-check">
+                    <input id="q34a1" class="form-check-input" type="radio" name="q34"  value="1" onchange="$(checkSign34).show()">
+                    <label for="q34a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q34a2" class="form-check-input" type="radio" name="q34"  value="2" onchange="$(checkSign34).show()">
+                    <label for="q34a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card35">
+            <div class="card-header">Вопрос 35 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign35"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне трудно преодолеть застенчивость, когда нужно говорить перед группой людей.</h5>
+
+                <div class="form-check">
+                    <input id="q35a1" class="form-check-input" type="radio" name="q35"  value="1" onchange="$(checkSign35).show()">
+                    <label for="q35a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q35a2" class="form-check-input" type="radio" name="q35"  value="2" onchange="$(checkSign35).show()">
+                    <label for="q35a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card36">
+            <div class="card-header">Вопрос 36 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign36"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мнение старших по возрасту или положению большого значения для меня не имеет.</h5>
+
+                <div class="form-check">
+                    <input id="q36a1" class="form-check-input" type="radio" name="q36"  value="1" onchange="$(checkSign36).show()">
+                    <label for="q36a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q36a2" class="form-check-input" type="radio" name="q36"  value="2" onchange="$(checkSign36).show()">
+                    <label for="q36a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card37">
+            <div class="card-header">Вопрос 37 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign37"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне не трудно заставить других людей действовать так, как я считаю нужным.</h5>
+
+                <div class="form-check">
+                    <input id="q37a1" class="form-check-input" type="radio" name="q37"  value="1" onchange="$(checkSign37).show()">
+                    <label for="q37a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q37a2" class="form-check-input" type="radio" name="q37"  value="2" onchange="$(checkSign37).show()">
+                    <label for="q37a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card38">
+            <div class="card-header">Вопрос 38 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign38"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я так сильно переживаю неудачи, что у меня ухудшается самочувствие.</h5>
+
+                <div class="form-check">
+                    <input id="q38a1" class="form-check-input" type="radio" name="q38"  value="1" onchange="$(checkSign38).show()">
+                    <label for="q38a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q38a2" class="form-check-input" type="radio" name="q38"  value="2" onchange="$(checkSign38).show()">
+                    <label for="q38a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card39">
+            <div class="card-header">Вопрос 39 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign39"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я всегда бываю упрям (упряма) в тех случаях, когда уверен (уверена) своей правоте.</h5>
+
+                <div class="form-check">
+                    <input id="q39a1" class="form-check-input" type="radio" name="q39"  value="1" onchange="$(checkSign39).show()">
+                    <label for="q39a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q39a2" class="form-check-input" type="radio" name="q39"  value="2" onchange="$(checkSign39).show()">
+                    <label for="q39a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card40">
+            <div class="card-header">Вопрос 40 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign40"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Если в компании я не нахожусь в центре внимания, мне становится скучно.</h5>
+
+                <div class="form-check">
+                    <input id="q40a1" class="form-check-input" type="radio" name="q40"  value="1" onchange="$(checkSign40).show()">
+                    <label for="q40a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q40a2" class="form-check-input" type="radio" name="q40"  value="2" onchange="$(checkSign40).show()">
+                    <label for="q40a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card41">
+            <div class="card-header">Вопрос 41 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign41"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Никто не может навязать мне свое мнение.</h5>
+
+                <div class="form-check">
+                    <input id="q41a1" class="form-check-input" type="radio" name="q41"  value="1" onchange="$(checkSign41).show()">
+                    <label for="q41a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q41a2" class="form-check-input" type="radio" name="q41"  value="2" onchange="$(checkSign41).show()">
+                    <label for="q41a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card42">
+            <div class="card-header">Вопрос 42 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign42"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне нравится путешествовать с разными, каждый раз новыми, попутчиками.</h5>
+
+                <div class="form-check">
+                    <input id="q42a1" class="form-check-input" type="radio" name="q42"  value="1" onchange="$(checkSign42).show()">
+                    <label for="q42a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q42a2" class="form-check-input" type="radio" name="q42"  value="2" onchange="$(checkSign42).show()">
+                    <label for="q42a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card43">
+            <div class="card-header">Вопрос 43 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign43"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я могу изменить свое мнение под давлением окружающих.</h5>
+
+                <div class="form-check">
+                    <input id="q43a1" class="form-check-input" type="radio" name="q43"  value="1" onchange="$(checkSign43).show()">
+                    <label for="q43a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q43a2" class="form-check-input" type="radio" name="q43"  value="2" onchange="$(checkSign43).show()">
+                    <label for="q43a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card44">
+            <div class="card-header">Вопрос 44 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign44"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">В поезде я с удовольствием провожу время в беседе с соседями по купе.</h5>
+
+                <div class="form-check">
+                    <input id="q44a1" class="form-check-input" type="radio" name="q44"  value="1" onchange="$(checkSign44).show()">
+                    <label for="q44a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q44a2" class="form-check-input" type="radio" name="q44"  value="2" onchange="$(checkSign44).show()">
+                    <label for="q44a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card45">
+            <div class="card-header">Вопрос 45 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign45"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я никогда не вру.</h5>
+
+                <div class="form-check">
+                    <input id="q45a1" class="form-check-input" type="radio" name="q45"  value="1" onchange="$(checkSign45).show()">
+                    <label for="q45a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q45a2" class="form-check-input" type="radio" name="q45"  value="2" onchange="$(checkSign45).show()">
+                    <label for="q45a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card46">
+            <div class="card-header">Вопрос 46 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign46"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я никогда не откладываю на завтра то, что следовало сделать сегодня.</h5>
+
+                <div class="form-check">
+                    <input id="q46a1" class="form-check-input" type="radio" name="q46"  value="1" onchange="$(checkSign46).show()">
+                    <label for="q46a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q46a2" class="form-check-input" type="radio" name="q46"  value="2" onchange="$(checkSign46).show()">
+                    <label for="q46a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card47">
+            <div class="card-header">Вопрос 47 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign47"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я вечно всем недоволен (недовольна).</h5>
+
+                <div class="form-check">
+                    <input id="q47a1" class="form-check-input" type="radio" name="q47"  value="1" onchange="$(checkSign47).show()">
+                    <label for="q47a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q47a2" class="form-check-input" type="radio" name="q47"  value="2" onchange="$(checkSign47).show()">
+                    <label for="q47a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card48">
+            <div class="card-header">Вопрос 48 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign48"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я люблю одиночество, позволяющее мне сосредоточиться на своих мыслях.</h5>
+
+                <div class="form-check">
+                    <input id="q48a1" class="form-check-input" type="radio" name="q48"  value="1" onchange="$(checkSign48).show()">
+                    <label for="q48a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q48a2" class="form-check-input" type="radio" name="q48"  value="2" onchange="$(checkSign48).show()">
+                    <label for="q48a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card49">
+            <div class="card-header">Вопрос 49 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign49"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я умею заинтересовать людей и повести их за собой.</h5>
+
+                <div class="form-check">
+                    <input id="q49a1" class="form-check-input" type="radio" name="q49"  value="1" onchange="$(checkSign49).show()">
+                    <label for="q49a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q49a2" class="form-check-input" type="radio" name="q49"  value="2" onchange="$(checkSign49).show()">
+                    <label for="q49a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card50">
+            <div class="card-header">Вопрос 50 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign50"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне нравится командовать другими.</h5>
+
+                <div class="form-check">
+                    <input id="q50a1" class="form-check-input" type="radio" name="q50"  value="1" onchange="$(checkSign50).show()">
+                    <label for="q50a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q50a2" class="form-check-input" type="radio" name="q50"  value="2" onchange="$(checkSign50).show()">
+                    <label for="q50a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card51">
+            <div class="card-header">Вопрос 51 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign51"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я умею дать отпор тем, кто вмешивается в мои дела.</h5>
+
+                <div class="form-check">
+                    <input id="q51a1" class="form-check-input" type="radio" name="q51"  value="1" onchange="$(checkSign51).show()">
+                    <label for="q51a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q51a2" class="form-check-input" type="radio" name="q51"  value="2" onchange="$(checkSign51).show()">
+                    <label for="q51a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card52">
+            <div class="card-header">Вопрос 52 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign52"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне бывает неловко за высказывания и поступки моих близких.</h5>
+
+                <div class="form-check">
+                    <input id="q52a1" class="form-check-input" type="radio" name="q52"  value="1" onchange="$(checkSign52).show()">
+                    <label for="q52a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q52a2" class="form-check-input" type="radio" name="q52"  value="2" onchange="$(checkSign52).show()">
+                    <label for="q52a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card53">
+            <div class="card-header">Вопрос 53 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign53"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне нередко приходилось в драке защищать свои права.</h5>
+
+                <div class="form-check">
+                    <input id="q53a1" class="form-check-input" type="radio" name="q53"  value="1" onchange="$(checkSign53).show()">
+                    <label for="q53a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q53a2" class="form-check-input" type="radio" name="q53"  value="2" onchange="$(checkSign53).show()">
+                    <label for="q53a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card54">
+            <div class="card-header">Вопрос 54 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign54"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я испытываю чувство вины (или даже стыда), если меня преследуют неудачи.</h5>
+
+                <div class="form-check">
+                    <input id="q54a1" class="form-check-input" type="radio" name="q54"  value="1" onchange="$(checkSign54).show()">
+                    <label for="q54a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q54a2" class="form-check-input" type="radio" name="q54"  value="2" onchange="$(checkSign54).show()">
+                    <label for="q54a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card55">
+            <div class="card-header">Вопрос 55 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign55"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мое настроение находится в сильной зависимости от настроя тех, кто меня окружает.</h5>
+
+                <div class="form-check">
+                    <input id="q55a1" class="form-check-input" type="radio" name="q55"  value="1" onchange="$(checkSign55).show()">
+                    <label for="q55a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q55a2" class="form-check-input" type="radio" name="q55"  value="2" onchange="$(checkSign55).show()">
+                    <label for="q55a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card56">
+            <div class="card-header">Вопрос 56 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign56"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я добиваюсь своего упорством и настойчивостью.</h5>
+
+                <div class="form-check">
+                    <input id="q56a1" class="form-check-input" type="radio" name="q56"  value="1" onchange="$(checkSign56).show()">
+                    <label for="q56a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q56a2" class="form-check-input" type="radio" name="q56"  value="2" onchange="$(checkSign56).show()">
+                    <label for="q56a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card57">
+            <div class="card-header">Вопрос 57 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign57"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне часто бывает скучно, когда все вокруг веселятся.</h5>
+
+                <div class="form-check">
+                    <input id="q57a1" class="form-check-input" type="radio" name="q57"  value="1" onchange="$(checkSign57).show()">
+                    <label for="q57a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q57a2" class="form-check-input" type="radio" name="q57"  value="2" onchange="$(checkSign57).show()">
+                    <label for="q57a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card58">
+            <div class="card-header">Вопрос 58 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign58"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мое грустное настроение легко исправляется, если я смотрю в кино или по телевизору комедийное представление.</h5>
+
+                <div class="form-check">
+                    <input id="q58a1" class="form-check-input" type="radio" name="q58"  value="1" onchange="$(checkSign58).show()">
+                    <label for="q58a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q58a2" class="form-check-input" type="radio" name="q58"  value="2" onchange="$(checkSign58).show()">
+                    <label for="q58a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card59">
+            <div class="card-header">Вопрос 59 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign59"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Ради сохранения добрых отношений я могу отказаться от своих намерений.</h5>
+
+                <div class="form-check">
+                    <input id="q59a1" class="form-check-input" type="radio" name="q59"  value="1" onchange="$(checkSign59).show()">
+                    <label for="q59a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q59a2" class="form-check-input" type="radio" name="q59"  value="2" onchange="$(checkSign59).show()">
+                    <label for="q59a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card60">
+            <div class="card-header">Вопрос 60 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign60"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я всегда придерживаюсь общепринятых правил поведения.</h5>
+
+                <div class="form-check">
+                    <input id="q60a1" class="form-check-input" type="radio" name="q60"  value="1" onchange="$(checkSign60).show()">
+                    <label for="q60a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q60a2" class="form-check-input" type="radio" name="q60"  value="2" onchange="$(checkSign60).show()">
+                    <label for="q60a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card61">
+            <div class="card-header">Вопрос 61 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign61"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Меня любят все мои друзья.</h5>
+
+                <div class="form-check">
+                    <input id="q61a1" class="form-check-input" type="radio" name="q61"  value="1" onchange="$(checkSign61).show()">
+                    <label for="q61a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q61a2" class="form-check-input" type="radio" name="q61"  value="2" onchange="$(checkSign61).show()">
+                    <label for="q61a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card62">
+            <div class="card-header">Вопрос 62 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign62"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">У меня трагичная судьба.</h5>
+
+                <div class="form-check">
+                    <input id="q62a1" class="form-check-input" type="radio" name="q62"  value="1" onchange="$(checkSign62).show()">
+                    <label for="q62a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q62a2" class="form-check-input" type="radio" name="q62"  value="2" onchange="$(checkSign62).show()">
+                    <label for="q62a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card63">
+            <div class="card-header">Вопрос 63 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign63"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">У меня много близких друзей.</h5>
+
+                <div class="form-check">
+                    <input id="q63a1" class="form-check-input" type="radio" name="q63"  value="1" onchange="$(checkSign63).show()">
+                    <label for="q63a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q63a2" class="form-check-input" type="radio" name="q63"  value="2" onchange="$(checkSign63).show()">
+                    <label for="q63a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card64">
+            <div class="card-header">Вопрос 64 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign64"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я — самый несчастный человек на свете.</h5>
+
+                <div class="form-check">
+                    <input id="q64a1" class="form-check-input" type="radio" name="q64"  value="1" onchange="$(checkSign64).show()">
+                    <label for="q64a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q64a2" class="form-check-input" type="radio" name="q64"  value="2" onchange="$(checkSign64).show()">
+                    <label for="q64a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card65">
+            <div class="card-header">Вопрос 65 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign65"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне проще надеяться на других, чем брать на себя ответственность, даже если речь идет о моих проблемах.</h5>
+
+                <div class="form-check">
+                    <input id="q65a1" class="form-check-input" type="radio" name="q65"  value="1" onchange="$(checkSign65).show()">
+                    <label for="q65a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q65a2" class="form-check-input" type="radio" name="q65"  value="2" onchange="$(checkSign65).show()">
+                    <label for="q65a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card66">
+            <div class="card-header">Вопрос 66 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign66"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я стараюсь быть таким (такой), как все, не выделяться! среди других.</h5>
+
+                <div class="form-check">
+                    <input id="q66a1" class="form-check-input" type="radio" name="q66"  value="1" onchange="$(checkSign66).show()">
+                    <label for="q66a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q66a2" class="form-check-input" type="radio" name="q66"  value="2" onchange="$(checkSign66).show()">
+                    <label for="q66a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card67">
+            <div class="card-header">Вопрос 67 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign67"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я — человек спокойный, уравновешенный.</h5>
+
+                <div class="form-check">
+                    <input id="q67a1" class="form-check-input" type="radio" name="q67"  value="1" onchange="$(checkSign67).show()">
+                    <label for="q67a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q67a2" class="form-check-input" type="radio" name="q67"  value="2" onchange="$(checkSign67).show()">
+                    <label for="q67a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card68">
+            <div class="card-header">Вопрос 68 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign68"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я могу долго не реагировать на чьи-то шутки, а потом! «взорваться».                                           </h5>
+
+                <div class="form-check">
+                    <input id="q68a1" class="form-check-input" type="radio" name="q68"  value="1" onchange="$(checkSign68).show()">
+                    <label for="q68a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q68a2" class="form-check-input" type="radio" name="q68"  value="2" onchange="$(checkSign68).show()">
+                    <label for="q68a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card69">
+            <div class="card-header">Вопрос 69 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign69"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я очень чувствителен (чувствительна) к изменениям погоды.</h5>
+
+                <div class="form-check">
+                    <input id="q69a1" class="form-check-input" type="radio" name="q69"  value="1" onchange="$(checkSign69).show()">
+                    <label for="q69a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q69a2" class="form-check-input" type="radio" name="q69"  value="2" onchange="$(checkSign69).show()">
+                    <label for="q69a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card70">
+            <div class="card-header">Вопрос 70 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign70"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я не люблю присутствовать на шумных застольях.</h5>
+
+                <div class="form-check">
+                    <input id="q70a1" class="form-check-input" type="radio" name="q70"  value="1" onchange="$(checkSign70).show()">
+                    <label for="q70a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q70a2" class="form-check-input" type="radio" name="q70"  value="2" onchange="$(checkSign70).show()">
+                    <label for="q70a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card71">
+            <div class="card-header">Вопрос 71 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign71"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я могу проявить безалаберность в делах, а потом понемногу привожу их в порядок.</h5>
+
+                <div class="form-check">
+                    <input id="q71a1" class="form-check-input" type="radio" name="q71"  value="1" onchange="$(checkSign71).show()">
+                    <label for="q71a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q71a2" class="form-check-input" type="radio" name="q71"  value="2" onchange="$(checkSign71).show()">
+                    <label for="q71a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card72">
+            <div class="card-header">Вопрос 72 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign72"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я люблю ходить в гости.</h5>
+
+                <div class="form-check">
+                    <input id="q72a1" class="form-check-input" type="radio" name="q72"  value="1" onchange="$(checkSign72).show()">
+                    <label for="q72a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q72a2" class="form-check-input" type="radio" name="q72"  value="2" onchange="$(checkSign72).show()">
+                    <label for="q72a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card73">
+            <div class="card-header">Вопрос 73 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign73"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне все равно, что обо мне думают окружающие.</h5>
+
+                <div class="form-check">
+                    <input id="q73a1" class="form-check-input" type="radio" name="q73"  value="1" onchange="$(checkSign73).show()">
+                    <label for="q73a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q73a2" class="form-check-input" type="radio" name="q73"  value="2" onchange="$(checkSign73).show()">
+                    <label for="q73a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card74">
+            <div class="card-header">Вопрос 74 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign74"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я волнуюсь только по поводу очень больших неприятностей.</h5>
+
+                <div class="form-check">
+                    <input id="q74a1" class="form-check-input" type="radio" name="q74"  value="1" onchange="$(checkSign74).show()">
+                    <label for="q74a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q74a2" class="form-check-input" type="radio" name="q74"  value="2" onchange="$(checkSign74).show()">
+                    <label for="q74a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card75">
+            <div class="card-header">Вопрос 75 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign75"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я никогда не испытываю желания выругаться.</h5>
+
+                <div class="form-check">
+                    <input id="q75a1" class="form-check-input" type="radio" name="q75"  value="1" onchange="$(checkSign75).show()">
+                    <label for="q75a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q75a2" class="form-check-input" type="radio" name="q75"  value="2" onchange="$(checkSign75).show()">
+                    <label for="q75a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card76">
+            <div class="card-header">Вопрос 76 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign76"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я никого никогда не обманывал (не обманывала).</h5>
+
+                <div class="form-check">
+                    <input id="q76a1" class="form-check-input" type="radio" name="q76"  value="1" onchange="$(checkSign76).show()">
+                    <label for="q76a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q76a2" class="form-check-input" type="radio" name="q76"  value="2" onchange="$(checkSign76).show()">
+                    <label for="q76a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card77">
+            <div class="card-header">Вопрос 77 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign77"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне никто не нужен, и я не нужен (не нужна) никому.</h5>
+
+                <div class="form-check">
+                    <input id="q77a1" class="form-check-input" type="radio" name="q77"  value="1" onchange="$(checkSign77).show()">
+                    <label for="q77a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q77a2" class="form-check-input" type="radio" name="q77"  value="2" onchange="$(checkSign77).show()">
+                    <label for="q77a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card78">
+            <div class="card-header">Вопрос 78 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign78"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я — человек застенчивый.</h5>
+
+                <div class="form-check">
+                    <input id="q78a1" class="form-check-input" type="radio" name="q78"  value="1" onchange="$(checkSign78).show()">
+                    <label for="q78a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q78a2" class="form-check-input" type="radio" name="q78"  value="2" onchange="$(checkSign78).show()">
+                    <label for="q78a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card79">
+            <div class="card-header">Вопрос 79 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign79"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Мне ужасно не везет в жизни.</h5>
+
+                <div class="form-check">
+                    <input id="q79a1" class="form-check-input" type="radio" name="q79"  value="1" onchange="$(checkSign79).show()">
+                    <label for="q79a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q79a2" class="form-check-input" type="radio" name="q79"  value="2" onchange="$(checkSign79).show()">
+                    <label for="q79a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card80">
+            <div class="card-header">Вопрос 80 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign80"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я часто стараюсь следовать советам более авторитетной личности.</h5>
+
+                <div class="form-check">
+                    <input id="q80a1" class="form-check-input" type="radio" name="q80"  value="1" onchange="$(checkSign80).show()">
+                    <label for="q80a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q80a2" class="form-check-input" type="radio" name="q80"  value="2" onchange="$(checkSign80).show()">
+                    <label for="q80a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card81">
+            <div class="card-header">Вопрос 81 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign81"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я бы очень переживал (переживала), если бы кого-то задел (задела) или обидел (обидела).</h5>
+
+                <div class="form-check">
+                    <input id="q81a1" class="form-check-input" type="radio" name="q81"  value="1" onchange="$(checkSign81).show()">
+                    <label for="q81a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q81a2" class="form-check-input" type="radio" name="q81"  value="2" onchange="$(checkSign81).show()">
+                    <label for="q81a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card82">
+            <div class="card-header">Вопрос 82 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign82"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Меня ничем не испугать.</h5>
+
+                <div class="form-check">
+                    <input id="q82a1" class="form-check-input" type="radio" name="q82"  value="1" onchange="$(checkSign82).show()">
+                    <label for="q82a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q82a2" class="form-check-input" type="radio" name="q82"  value="2" onchange="$(checkSign82).show()">
+                    <label for="q82a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card83">
+            <div class="card-header">Вопрос 83 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign83"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я часто пользуюсь чужими советами при решении своих проблем.</h5>
+
+                <div class="form-check">
+                    <input id="q83a1" class="form-check-input" type="radio" name="q83"  value="1" onchange="$(checkSign83).show()">
+                    <label for="q83a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q83a2" class="form-check-input" type="radio" name="q83"  value="2" onchange="$(checkSign83).show()">
+                    <label for="q83a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card84">
+            <div class="card-header">Вопрос 84 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign84"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">В своих неудачах я в первую очередь виню себя.</h5>
+
+                <div class="form-check">
+                    <input id="q84a1" class="form-check-input" type="radio" name="q84"  value="1" onchange="$(checkSign84).show()">
+                    <label for="q84a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q84a2" class="form-check-input" type="radio" name="q84"  value="2" onchange="$(checkSign84).show()">
+                    <label for="q84a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card85">
+            <div class="card-header">Вопрос 85 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign85"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я совершенно не обращаю внимания на свой стиль одежды.</h5>
+
+                <div class="form-check">
+                    <input id="q85a1" class="form-check-input" type="radio" name="q85"  value="1" onchange="$(checkSign85).show()">
+                    <label for="q85a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q85a2" class="form-check-input" type="radio" name="q85"  value="2" onchange="$(checkSign85).show()">
+                    <label for="q85a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card86">
+            <div class="card-header">Вопрос 86 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign86"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я не стараюсь планировать свое ближайшее будущее.</h5>
+
+                <div class="form-check">
+                    <input id="q86a1" class="form-check-input" type="radio" name="q86"  value="1" onchange="$(checkSign86).show()">
+                    <label for="q86a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q86a2" class="form-check-input" type="radio" name="q86"  value="2" onchange="$(checkSign86).show()">
+                    <label for="q86a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card87">
+            <div class="card-header">Вопрос 87 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign87"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Когда меня зовут в гости, я чаще всего думаю: «Лучше бы мне остаться дома».</h5>
+
+                <div class="form-check">
+                    <input id="q87a1" class="form-check-input" type="radio" name="q87"  value="1" onchange="$(checkSign87).show()">
+                    <label for="q87a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q87a2" class="form-check-input" type="radio" name="q87"  value="2" onchange="$(checkSign87).show()">
+                    <label for="q87a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card88">
+            <div class="card-header">Вопрос 88 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign88"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я ничего не знаю о личных проблемах окружающих меня людей.</h5>
+
+                <div class="form-check">
+                    <input id="q88a1" class="form-check-input" type="radio" name="q88"  value="1" onchange="$(checkSign88).show()">
+                    <label for="q88a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q88a2" class="form-check-input" type="radio" name="q88"  value="2" onchange="$(checkSign88).show()">
+                    <label for="q88a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card89">
+            <div class="card-header">Вопрос 89 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign89"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Малейшая неудача резко снижает мое настроение.</h5>
+
+                <div class="form-check">
+                    <input id="q89a1" class="form-check-input" type="radio" name="q89"  value="1" onchange="$(checkSign89).show()">
+                    <label for="q89a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q89a2" class="form-check-input" type="radio" name="q89"  value="2" onchange="$(checkSign89).show()">
+                    <label for="q89a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card90">
+            <div class="card-header">Вопрос 90 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign90"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я никогда не сержусь.</h5>
+
+                <div class="form-check">
+                    <input id="q90a1" class="form-check-input" type="radio" name="q90"  value="1" onchange="$(checkSign90).show()">
+                    <label for="q90a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q90a2" class="form-check-input" type="radio" name="q90"  value="2" onchange="$(checkSign90).show()">
+                    <label for="q90a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card mb-5 questionCard" id="card91">
+            <div class="card-header">Вопрос 91 <i class="fa fa-check pull-right dn" aria-hidden="true" style="color: green" id="checkSign91"></i></div>
+            <div class="card-body questionBody">
+                <h5 class="card-title">Я правдиво ответил (ответила) на все вопросы.</h5>
+
+                <div class="form-check">
+                    <input id="q91a1" class="form-check-input" type="radio" name="q91"  value="1" onchange="$(checkSign91).show()">
+                    <label for="q91a1" class="form-check-label">Верно</label>
+                </div>
+                <div class="form-check">
+                    <input id="q91a2" class="form-check-input" type="radio" name="q91"  value="2" onchange="$(checkSign91).show()">
+                    <label for="q91a2" class="form-check-label">Неверно</label>
+                </div>
+
+            </div>
+        </div>
+
+
+-->
+
+
+    </form>
+<button class="btn btn-primary" onclick="sendData()">Сохранить ответы</button>
+    <br><br>
+
+
+
+    {{template "bottom"}}
+{{end}}
+
+
