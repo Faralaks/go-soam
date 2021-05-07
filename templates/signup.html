@@ -1,0 +1,58 @@
+{{define "scripts"}}
+<script>
+    function sendSignupData() {
+        $.post("/signup", $("#signupForm").serialize()).done(function (response) {
+            console.log(response)
+            if (response.kind !== "Suc") {
+                $("#signupErr").text(response.msg).show();
+                return;
+            }
+            document.location.replace("/testee");
+        }).fail(function (){ $("#signupErr").show(); })
+    }
+
+    $("#indexPasswordField").ready(function () {$("#indexPasswordField").keyup(function(event){
+        if(event.key === "Enter"){
+            sendLoginData()
+        }
+    })});
+</script>
+{{end}}
+{{define "styles"}}{{end}}
+{{define "signup"}}
+{{template "head"}}
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="card mx-auto" style="width: 26rem;">
+
+            <div class="card-body" id="signupCard">
+                <h5 class="card-title">Для регистрации требуются дополнительные данные</h5>
+
+                <form id="signupForm">
+                    <input class="dn" type="text" name="newLogin" value="{{.UserId}}">
+
+                    <div class="form-group row">
+                        <div class="form-group" style="margin: auto">
+                            <label for="egeField">Возраст</label><br>
+                            <input type="number" class="form-control" id="egeField" name="ege"  min="1" max="99" placeholder="" style="width: 90px">
+                        </div>
+                        <div class="form-group" style="margin: auto">
+                            <label for="gradeField">Класс</label><br>
+                            <input type="number" class="form-control" id="gradeField" name="grade"  min="1" max="11" placeholder=""  style="width: 90px">
+                        </div>
+                    </div><br>
+
+                    <input type="button" class="btn btn-primary float-right" value="Зарегистрироваться" onclick="sendSignupData()"><br><br>
+                    <div id="signupErr" class="card-footer text-danger text-center dn">Произошла неизвестная ошибка</div>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+{{template "bottom"}}
+{{end}}
+

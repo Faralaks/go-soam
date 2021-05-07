@@ -14,23 +14,27 @@ import (
 )
 
 type configType struct {
-	CurPath        string
-	Port           string
-	Address        string
-	Gcm            cipher.AEAD
-	PasSecret      []byte
-	AccessSecret   []byte
-	RefreshSecret  []byte
-	ATLifeTime     time.Duration
-	RTLifeTime     time.Duration
-	MongoUrl       string
-	DbName         string
-	UsersColName   string
-	TokensColName  string
-	ResultsColName string
-	StatsColName   string
-	TestList       []string
-	TestCount      uint8
+	CurPath           string
+	Port              string
+	Address           string
+	Gcm               cipher.AEAD
+	PasSecret         []byte
+	AccessSecret      []byte
+	RefreshSecret     []byte
+	ATLifeTime        time.Duration
+	RTLifeTime        time.Duration
+	MongoUrl          string
+	DbName            string
+	UsersColName      string
+	TokensColName     string
+	ResultsColName    string
+	StatsColName      string
+	TestList          []string
+	TestCount         uint8
+	OauthClientID     string
+	OauthKey          string
+	OauthRedirectPath string
+	OauthRedirectURL  string
 }
 
 var configData map[string]string
@@ -51,15 +55,15 @@ func ReadFeedBack() {
 }
 
 func VPrint(lines ...interface{}) {
-	FeedBack <- fmt.Sprintf("\n======= %v   ¯\\_(ツ)_/¯    =======", feedCounter)
+	fmt.Printf("\n======= %v   ¯\\_(ツ)_/¯    =======\n", feedCounter)
 	for i, s := range lines {
 		if fmt.Sprintf("%T", s) == "string" {
-			FeedBack <- fmt.Sprintf("%v %T\t\"%v\" l: %v", i, s, s, len(s.(string)))
+			fmt.Printf("%v %T\t\"%v\" l: %v\n", i, s, s, len(s.(string)))
 		} else {
-			FeedBack <- fmt.Sprintf("%v %T\t%v", i, s, s)
+			fmt.Printf("%v %T\t%v\n", i, s, s)
 		}
 	}
-	FeedBack <- "=======   ~~~~~~~~~~~~    ======="
+	fmt.Print("=======   ~~~~~~~~~~~~    =======\n")
 	feedCounter++
 
 }

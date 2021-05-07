@@ -56,24 +56,31 @@ const MskOffset = 10800
 type User struct {
 	Uid          p.ObjectID `json:"uid" bson:"_id"`
 	Login        B64String  `json:"login" bson:"login"`
-	Pas          string     `json:"pas" bson:"pas"`
+	VKToken      string     `json:"vk_token,omitempty" bson:"vk_token,omitempty"`
+	Pas          string     `json:"pas,omitempty" bson:"pas,omitempty"`
 	Status       string     `json:"status" bson:"status"`
 	CreatedDate  Timestamp  `json:"create_date" bson:"createdDate"`
 	ModifiedDate Timestamp  `json:"modifiedDate,omitempty" bson:"modifiedDate,omitempty"`
 }
 
 type FullUser struct {
-	Uid          p.ObjectID  `json:"uid" bson:"_id"`
-	Login        B64String   `json:"login" bson:"login"`
-	Pas          string      `json:"pas,omitempty" bson:"pas"`
-	Status       string      `json:"status" bson:"status"`
-	CreatedDate  Timestamp   `json:"create_date" bson:"createdDate"`
-	ModifiedDate Timestamp   `json:"modifiedDate,omitempty" bson:"modifiedDate,omitempty"`
-	Step         uint8       `json:"step,omitempty" bson:"step"`
-	Tests        []string    `json:"tests,omitempty" bson:"tests"`
+	Uid          p.ObjectID             `json:"uid" bson:"_id"`
+	Login        B64String              `json:"login" bson:"login"`
+	Pas          string                 `json:"pas,omitempty" bson:"pas"`
+	Status       string                 `json:"status" bson:"status"`
+	CreatedDate  Timestamp              `json:"create_date" bson:"createdDate"`
+	ModifiedDate Timestamp              `json:"modifiedDate,omitempty" bson:"modifiedDate,omitempty"`
+	Step         uint8                  `json:"step,omitempty" bson:"step"`
+	Tests        []string               `json:"tests,omitempty" bson:"tests"`
 	Result       map[string]interface{} `json:"result,omitempty" bson:"result,omitempty"`
-	Name         string      `json:"name,omitempty" bson:"name"`
-	BirthYear    uint16      `json:"birthYear,omitempty" bson:"birthYear"`
-	Ege          uint8       `json:"ege,omitempty" bson:"ege"`
-	Grade        uint8       `json:"grade,omitempty" bson:"grade"`
+	Name         string                 `json:"name,omitempty" bson:"name"`
+	BirthYear    uint16                 `json:"birthYear,omitempty" bson:"birthYear"`
+	Ege          uint8                  `json:"ege,omitempty" bson:"ege"`
+	Grade        uint8                  `json:"grade,omitempty" bson:"grade"`
+}
+
+type VKTokenData struct {
+	Token     string `json:"access_token"`
+	ExpiresIn int    `json:"expires_in"`
+	UserId    int    `json:"user_id"`
 }

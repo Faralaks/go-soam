@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"time"
 	. "tools"
+	. "vk"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -21,7 +22,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = tmpl.ExecuteTemplate(w, "index", nil)
+	err = tmpl.ExecuteTemplate(w, "index", GetOauthLink())
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return

@@ -13,5 +13,9 @@
     "refreshSecret":"refreshsecret",
     "atLifeTime": "10",
     "rtLifeTime": "60",
-    "testList": "BPAQ,ITO"
+    "testList": "BPAQ,ITO",
+    "oauthClientId": "",
+    "oauthKey": "",
+    "oauthRedirectPath": "/save_vk_token",
+    "oauthRedirectUrl": "http://localhost:80/save_vk_token"
 }

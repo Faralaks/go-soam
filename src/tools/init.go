@@ -67,6 +67,12 @@ func init() {
 	Config.ResultsColName = configData["resultsColName"]
 	Config.TestList = strings.Split(configData["testList"], ",")
 	Config.TestCount = uint8(len(Config.TestList))
+
+	Config.OauthClientID = configData["oauthClientId"]
+	Config.OauthKey = configData["oauthKey"]
+	Config.OauthRedirectPath = configData["oauthRedirectPath"]
+	Config.OauthRedirectURL = configData["oauthRedirectUrl"]
+
 	FeedBack <- "Config is Ready!"
 	client, err := mongo.NewClient(options.Client().ApplyURI(Config.MongoUrl))
 	if err != nil {
