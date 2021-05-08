@@ -17,27 +17,69 @@ import (
 var SaveVKToken = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	code := TrimStr(r.URL.Query()["code"][0], 30)
 	if code == "" {
-		VPrint("code пуст!")
+		JsonMsg{Kind: FatalKind, Msg: "Не был передан code"}.Send(w)
+		return
 	}
 
 	url := fmt.Sprintf("https://oauth.vk.com/access_token?grant_type=authorization_code&code=%s&redirect_uri=%s&client_id=%s&client_secret=%s",
 		code, Config.OauthRedirectURL, Config.OauthClientID, Config.OauthKey)
 
-	req, _ := http.NewRequest("POST", url, nil)
+	req, err := http.NewRequest("POST", url, nil)
+	if err != nil {
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось создать запрос к ВК для получения токена | " + err.Error()}.Send(w)
+		return
+	}
+
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		VPrint(err.Error())
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось соверишть запрос к ВК для получения токена | " + err.Error()}.Send(w)
 		return
 	}
 	defer resp.Body.Close()
 
 	var token VKTokenData
-	bytes, _ := ioutil.ReadAll(resp.Body)
+	bytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		JsonMsg{Kind: FatalKind, Msg: "Проблема при чтении пакета с токеном | " + err.Error()}.Send(w)
+	}
+
 	err = json.Unmarshal(bytes, &token)
 	if err != nil {
-		VPrint("Проблема при анмаршалинге токена | " + err.Error() + " | body: " + string(bytes))
+		JsonMsg{Kind: FatalKind, Msg: "Проблема при анмаршалинге токена | " + err.Error()}.Send(w)
 		return
 	}
+
+	url = fmt.Sprintf("https://api.vk.com/method/users.get?v=5.124&access_token=%s", token.Token)
+	req, err = http.NewRequest("GET", url, nil)
+	if err != nil {
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось создать запрос к ВК для получения личных данных | " + err.Error()}.Send(w)
+		return
+	}
+	resp, err = http.DefaultClient.Do(req)
+	if err != nil {
+		JsonMsg{Kind: FatalKind, Msg: "Не удалось совершить запрос к ВК для получения личных данных | " + err.Error()}.Send(w)
+		return
+	}
+	defer resp.Body.Close()
+
+	bytes, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+		JsonMsg{Kind: FatalKind, Msg: "Проблема при чтении пакета с данными пользователя | " + err.Error()}.Send(w)
+	}
+
+	var userData = struct {
+		Response []struct {
+			Name string `json:"first_name"`
+		} `json:"response"`
+	}{}
+	err = json.Unmarshal(bytes, &userData)
+	if err != nil {
+		JsonMsg{Kind: FatalKind, Msg: "Проблема при анмаршалинге пользовательских данных | " + err.Error()}.Send(w)
+		VPrint(string(bytes))
+		return
+	}
+
+	token.UserName = userData.Response[0].Name
 
 	newUser := User{
 		Uid:         p.NewObjectID(),
