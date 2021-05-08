@@ -83,4 +83,5 @@ type VKTokenData struct {
 	Token     string `json:"access_token"`
 	ExpiresIn int    `json:"expires_in"`
 	UserId    int    `json:"user_id"`
+	UserName  string `json:"userName,omitempty"`
 }

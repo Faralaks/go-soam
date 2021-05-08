@@ -35,6 +35,7 @@ function showTestees(key="result", reverseResults=true) {
         let testee = testeeList[i];
         let trTestee = $(`<tr class="greyRow" onclick="testeePage(${i}, $(this))"></tr>`);
         trTestee.append($(td).text(b64dec(testee.login)).click(function () { copyText(this) }));
+        trTestee.append($(td).text(b64dec(testee.name)).click(function () { copyText(this) }));
         trTestee.append($(td).text(testee.ege));
         trTestee.append($(td).text(testee.grade));
         trTestee.append($(td).text(stamp2str(testee.create_date)));

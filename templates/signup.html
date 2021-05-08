@@ -26,10 +26,11 @@
         <div class="card mx-auto" style="width: 26rem;">
 
             <div class="card-body" id="signupCard">
-                <h5 class="card-title">Для регистрации требуются дополнительные данные</h5>
+                <h5 class="card-title">{{.UserName}}, Для регистрации требуются дополнительные данные</h5>
 
                 <form id="signupForm">
-                    <input class="dn" type="text" name="newLogin" value="{{.UserId}}">
+                    <input class="dn" type="text" name="newLogin" value="{{.UserId}}" readonly>
+                    <input class="dn" type="text" name="username" value="{{.UserName}}" readonly>
 
                     <div class="form-group row">
                         <div class="form-group" style="margin: auto">

@@ -56,7 +56,7 @@ var remakeDb = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 	u := User{
 		Uid:          p.NewObjectID(),
 		Login:        NewB64String("master"),
-		Pas:          "",
+		Pas:          "a",
 		Status:       AdminStatus,
 		CreatedDate:  CurUtcStamp(),
 		ModifiedDate: CurUtcStamp(),

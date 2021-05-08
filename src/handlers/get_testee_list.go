@@ -32,7 +32,6 @@ var Get_testee_list = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
 			JsonMsg{Kind: FatalKind, Msg: "В процессе декодирования испытуемых произошла ошибка | " + err.Error()}.Send(w)
 			return
 		}
-		elem.Pas = elem.Pas
 		response.TesteeList = append(response.TesteeList, &elem)
 	}
 
